@@ -11,18 +11,7 @@ from users.forms import CustomerRegistrationForm
 from users.models import CustomUser
 
 
-class CustomerRegisterView(CreateView):
-    form_class = CustomerRegistrationForm
-    template_name = 'users/register.html'
-    success_url = reverse_lazy('customer_dashboard')
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return HttpResponseRedirect(self.success_url)
-
-
-class BaseUserLoginView(LoginView):
+class CustomerHomePageView(LoginView):
     template_name = 'users/login.html'
     success_url = None
 
@@ -43,11 +32,6 @@ class BaseUserLoginView(LoginView):
 
     def get_success_url(self):
         return self.success_url
-
-
-class ManagerLoginView(BaseUserLoginView):
-    success_url = reverse_lazy('manager_dashboard')
-    user_type = CustomUser.Type.MANAGER
 
 
 class BaseLogoutView(LogoutView):
