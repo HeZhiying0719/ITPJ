@@ -1,3 +1,12 @@
-from django.shortcuts import render
+import logging
 
-# Create your views here.
+from django.views.generic import TemplateView
+
+
+
+logger = logging.getLogger(__name__)
+
+
+class HomePageView(TemplateView):
+    template_name = 'core/homepage.html'
+

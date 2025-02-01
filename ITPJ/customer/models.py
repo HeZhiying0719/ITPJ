@@ -1,13 +1,28 @@
 from django.db import models
 from django.conf import settings
 
-# class Dashboard(models.Model):
-#     user = models.OneToOneField(
-#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user'
-#     )
-#     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#
-#     def __str__(self):
-#         return f'{self.user.username} - {self.balance}'
+from core.models import Post
+from users.models import CustomUser
+
+#User Profile (Including Avatar)
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_profile'
+    )
+
+    avatar = models.ImageField(upload_to='media/avatars', null=True, blank=True)
+
+    introduction = models.TextField(null=True, blank=True)
+
+
+
+class Favicon(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user'
+    )
+    blog_id = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='blog'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
