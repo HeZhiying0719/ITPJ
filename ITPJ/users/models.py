@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 class CustomUser(AbstractUser):
     class Type(models.TextChoices):
         CUSTOMER = ('customer', _('Customer'))
-        VISITOR = ('visitor', _('Visitor'))
+        MANAGER = ('manager', _('Manager'))
 
     type = models.CharField(max_length=20, choices=Type.choices)
 

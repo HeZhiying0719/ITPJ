@@ -28,6 +28,7 @@ class Blog(models.Model):
     category4 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category4', blank=True)
     category5 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category5', blank=True)
 
+    like_num = models.IntegerField(default=0)
 
 
 
