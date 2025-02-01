@@ -10,7 +10,7 @@ class Category(models.Model):
         return self.name
 
 class Blog(models.Model):
-    blog_id = models.CharField(max_length=6, unique=True, primary_key=True)
+    blog_id = models.CharField(max_length=8, unique=True, primary_key=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
@@ -28,8 +28,16 @@ class Blog(models.Model):
     category4 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category4', blank=True)
     category5 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category5', blank=True)
 
+
+
+
+    def save(self, *args, **kwargs):
+        if not self.blog_id:
+            self.blog_id = self.__generate_unique_id()
+        super().save(*args, **kwargs)
+
     def __generate_unique_id(self):
         while True:
-            blog_id = str(random.randint(100000, 999999))
+            blog_id = str(random.randint(10000000, 99999999))
             if not Blog.objects.filter(blog_id=blog_id).exists():
                 return blog_id
