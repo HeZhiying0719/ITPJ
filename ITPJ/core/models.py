@@ -9,8 +9,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Blog(models.Model):
-    blog_id = models.CharField(max_length=8, unique=True, primary_key=True)
+class Post(models.Model):
+    post_id = models.CharField(max_length=8, unique=True, primary_key=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
@@ -33,12 +33,12 @@ class Blog(models.Model):
 
 
     def save(self, *args, **kwargs):
-        if not self.blog_id:
-            self.blog_id = self.__generate_unique_id()
+        if not self.post_id:
+            self.post_id = self.__generate_unique_id()
         super().save(*args, **kwargs)
 
     def __generate_unique_id(self):
         while True:
-            blog_id = str(random.randint(10000000, 99999999))
-            if not Blog.objects.filter(blog_id=blog_id).exists():
-                return blog_id
+            post_id = str(random.randint(10000000, 99999999))
+            if not Post.objects.filter(post_id=post_id).exists():
+                return post_id

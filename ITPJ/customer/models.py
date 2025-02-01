@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from core.models import Blog
+from core.models import Post
 from users.models import CustomUser
 
 #User Profile (Including Avatar)
@@ -21,7 +21,7 @@ class Favicon(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user'
     )
     blog_id = models.ForeignKey(
-        Blog, on_delete=models.CASCADE, related_name='blog'
+        Post, on_delete=models.CASCADE, related_name='blog'
     )
 
     created_at = models.DateTimeField(auto_now_add=True)

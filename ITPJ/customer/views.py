@@ -6,10 +6,30 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, TemplateView
-
+from customer.mixins import LoginRequiredMixin
+from django.views.generic import DetailView, ListView
 from users.forms import CustomerRegistrationForm
 from users.models import CustomUser
+from users.views import BaseUserLoginView
 
+# class LoginView(BaseUserLoginView):
+#     success_url = reverse_lazy('customer_dashboard')
+#     user_type = CustomUser.Type.CUSTOMER
+#
+#
+# class DashboardView(LoginRequiredMixin, ListView):
+#     # template_name = 'customers/dashboard.html'
+#     # model = Trip
+#     # queryset = Trip.objects.select_related('start_location', 'payment')
+#     # context_object_name = 'trips'
+#     # paginate_by = 10
+#     # ordering = '-start_time'
+#     #
+#     # def get_queryset(self):
+#     #     queryset = super().get_queryset()
+#     #     queryset = queryset.filter(user=self.request.user)
+#     #     return queryset
+#     #
 
 class CustomerHomePageView(LoginView):
     template_name = 'users/login.html'
@@ -32,11 +52,3 @@ class CustomerHomePageView(LoginView):
 
     def get_success_url(self):
         return self.success_url
-
-
-class BaseLogoutView(LogoutView):
-    next_page = reverse_lazy('home')
-
-    def dispatch(self, request, *args, **kwargs):
-        messages.success(request, _('You have been successfully logged out.'))
-        return super().dispatch(request, *args, **kwargs)
