@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from core.models import Blog, Category
+from core.models import Post, Category
 
-@admin.register(Blog)
-class BlogAdmin(admin.ModelAdmin):
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
     list_display = (
-        'blog_id',
+        'post_id',
         'user',
         'title',
         'content',
@@ -17,11 +17,11 @@ class BlogAdmin(admin.ModelAdmin):
         'created_at',
         'updated_at',
     )
-    readonly_fields = ('blog_id',)
+    readonly_fields = ('post_id',)
 
 
 @admin.register(Category)
-class BlogAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
