@@ -26,6 +26,8 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('', include('core.urls')),
     path('customer/', include('customer.urls')),
+    path('manager/', include('manager.urls')),
+
 ]
 
 # urlpatterns += i18n_patterns(

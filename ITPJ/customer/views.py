@@ -18,17 +18,3 @@ class LoginView(BaseUserLoginView):
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'customers/dashboard.html'
-
-# class DashboardView(LoginRequiredMixin, ListView):
-#     template_name = 'customers/dashboard.html'
-#     # model = Trip
-#     # queryset = Trip.objects.select_related('start_location', 'payment')
-#     # context_object_name = 'trips'
-#     # paginate_by = 10
-#     # ordering = '-start_time'
-#
-#     # def get_queryset(self):
-#     #     queryset = super().get_queryset()
-#     #     queryset = queryset.filter(user=self.request.user)
-#     #     return queryset
-#

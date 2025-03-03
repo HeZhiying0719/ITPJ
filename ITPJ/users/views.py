@@ -15,7 +15,7 @@ from users.models import CustomUser
 class CustomerRegisterView(CreateView):
     form_class = CustomerRegistrationForm
     template_name = 'users/register.html'
-    success_url = reverse_lazy('customer_homepage')
+    success_url = reverse_lazy('customer_dashboard')
 
     def form_valid(self, form):
         user = form.save()
