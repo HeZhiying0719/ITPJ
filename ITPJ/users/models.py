@@ -6,6 +6,7 @@ class CustomUser(AbstractUser):
     class Type(models.TextChoices):
         CUSTOMER = ('customer', _('Customer'))
         MANAGER = ('manager', _('Manager'))
+        VISITOR = ('visitor', _('Visitor'))
 
     type = models.CharField(max_length=20, choices=Type.choices)
 
