@@ -1,1 +1,111 @@
-<head>THIS IS THE CORE HOMEPAGE</head>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block right %}
+                <!-- Right Content Area -->
+                <div class="col-md-9">
+                    <!-- Featured Posts (3 boxes at top) -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img
+                                    src="/img/dog.jpeg"
+                                    class="card-img-top"
+                                    alt="Featured post image"
+                                />
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        The Art of Landscape Photography
+                                    </h6>
+                                    <div
+                                        class="d-flex justify-content-between align-items-center mt-2"
+                                    >
+                                        <small class="text-muted"
+                                            >By John Doe</small
+                                        >
+                                        <small class="text-muted"
+                                            >2 days ago</small
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img
+                                    src="/img/dog.jpeg"
+                                    class="card-img-top"
+                                    alt="Featured post image"
+                                />
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        Best DSLR Cameras for Beginners
+                                    </h6>
+                                    <div
+                                        class="d-flex justify-content-between align-items-center mt-2"
+                                    >
+                                        <small class="text-muted"
+                                            >By Jane Smith</small
+                                        >
+                                        <small class="text-muted"
+                                            >1 week ago</small
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img
+                                    src="/img/dog.jpeg"
+                                    class="card-img-top"
+                                    alt="Featured post image"
+                                />
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        Mastering Night Photography
+                                    </h6>
+                                    <div
+                                        class="d-flex justify-content-between align-items-center mt-2"
+                                    >
+                                        <small class="text-muted"
+                                            >By Mike Johnson</small
+                                        >
+                                        <small class="text-muted"
+                                            >3 days ago</small
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post Listings -->
+                    <div class="posts" id="postsContainer">
+                        <!-- Posts will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="text-center mt-4 mb-4">
+                        <button
+                            class="btn btn-outline-primary"
+                            id="loadMoreBtn"
+                        >
+                            Load More
+                        </button>
+                    </div>
+
+                    <!-- Loading Indicator -->
+                    <div
+                        class="text-center mt-4 mb-4 d-none"
+                        id="loadingIndicator"
+                    >
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Loading more posts...</p>
+                    </div>
+                </div>
+    </div>
+
+{% endblock %}

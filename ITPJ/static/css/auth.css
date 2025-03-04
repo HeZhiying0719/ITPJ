@@ -1,0 +1,185 @@
+/* Authentication Pages Styles (Login & Registration) */
+
+/* Global layout fixes */
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container.py-5 {
+    flex: 1 0 auto;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-title {
+    color: #343a40;
+    font-weight: 600;
+}
+
+/* Form controls */
+.form-control,
+.input-group-text {
+    border-color: #dee2e6;
+    padding: 0.6rem 0.75rem;
+}
+
+.form-control:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+
+.form-text {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.form-check-input:checked {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.form-check-input:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #343a40;
+    border-color: #343a40;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #23272b;
+    border-color: #23272b;
+    transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #dee2e6;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+/* Password strength meter */
+.password-strength-meter {
+    height: 5px;
+    width: 100%;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.password-strength-meter .strength {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    width: 0;
+}
+
+.strength-weak {
+    width: 30% !important;
+    background-color: #dc3545 !important;
+}
+
+.strength-medium {
+    width: 65% !important;
+    background-color: #ffc107 !important;
+}
+
+.strength-strong {
+    width: 100% !important;
+    background-color: #28a745 !important;
+}
+
+/* Link styling */
+a {
+    color: #0d6efd;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #0a58ca;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: auto;
+    background-color: #343a40;
+    color: white;
+    padding: 1.5rem 0;
+    width: 100%;
+}
+
+.footer .logo {
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 2rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 0.5rem;
+    }
+}

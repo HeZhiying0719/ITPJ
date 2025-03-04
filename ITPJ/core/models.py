@@ -20,6 +20,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.TextField(max_length=100, null=False, blank=False)
+
+    photo = models.ImageField(upload_to='media/post_photos', null=True, blank=True)
+
     content = models.TextField(max_length=500, null=False, blank=True)
 
     category1 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category1')
