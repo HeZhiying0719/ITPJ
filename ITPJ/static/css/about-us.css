@@ -1,0 +1,122 @@
+/* About Us Page Specific Styles */
+
+/* Main container styles */
+.about-section {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.about-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Section headers */
+.about-section h2 {
+    color: #343a40;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.5rem;
+}
+
+/* Contact information styling */
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+.contact-item:hover {
+    transform: translateX(5px);
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    color: #495057;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover i {
+    color: #0d6efd;
+}
+
+/* Google Maps container */
+.map-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.map-container:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Team image styling */
+.team-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.team-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 1.5rem;
+    }
+
+    .team-image {
+        height: 200px;
+        margin-top: 1rem;
+    }
+
+    .map-container {
+        height: 200px;
+    }
+}
+
+/* Animation for page load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-section {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.about-section:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.about-section:nth-child(3) {
+    animation-delay: 0.2s;
+}

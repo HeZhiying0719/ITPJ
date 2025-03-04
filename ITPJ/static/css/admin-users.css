@@ -1,0 +1,290 @@
+/* Admin Users Management Specific Styles */
+
+/* Global layout fixes */
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container.py-4 {
+    flex: 1 0 auto;
+}
+
+/* Page title */
+h2 {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* User item styling */
+.user-item {
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+}
+
+.user-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.role-badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+/* User stats styling */
+.user-stats {
+    padding: 0.5rem 0;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #343a40;
+    font-size: 0.95rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Action buttons */
+.action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Filter controls */
+.form-select,
+.form-control {
+    border-color: #dee2e6;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.users-list .user-item {
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.users-list .user-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.users-list .user-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+/* Active admin sidebar item */
+.list-group-item.active {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+/* Modal styling */
+.modal-content {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.modal-footer {
+    border-top: 1px solid #f1f1f1;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: auto;
+    background-color: #343a40;
+    color: white;
+    padding: 1.5rem 0;
+    width: 100%;
+}
+
+.footer .logo {
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Pagination */
+.pagination .page-link {
+    color: #6c757d;
+    border-color: #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #343a40;
+    border-color: #343a40;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #e9ecef;
+    color: #343a40;
+}
+
+/* Password strength meter */
+.password-strength-meter {
+    height: 5px;
+    width: 100%;
+    background-color: #e9ecef;
+    margin-top: 5px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.password-strength-meter .strength {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.strength-weak {
+    width: 30%;
+    background-color: #dc3545;
+}
+
+.strength-medium {
+    width: 65%;
+    background-color: #ffc107;
+}
+
+.strength-strong {
+    width: 100%;
+    background-color: #28a745;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .action-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+
+    .col-md-2.d-flex {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 10px 0;
+    }
+
+    .user-stats {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .stat-item {
+        margin-bottom: 0.5rem;
+        text-align: left;
+    }
+
+    .role-badge {
+        margin-top: 0.25rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .user-item .row {
+        flex-direction: column;
+    }
+
+    .col-md-1,
+    .col-md-4,
+    .col-md-5,
+    .col-md-2 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .col-md-1 {
+        margin-bottom: 1rem;
+    }
+
+    .col-md-2 {
+        justify-content: center;
+    }
+}

@@ -1,0 +1,392 @@
+/* Admin Posts Management Specific Styles */
+
+/* Global layout fixes */
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container.py-4 {
+    flex: 1 0 auto;
+}
+
+/* Page title */
+h2 {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* Post item styling */
+.post-item {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+
+.post-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.post-img {
+    height: 160px;
+    object-fit: cover;
+}
+
+.post-excerpt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Admin action buttons */
+.admin-action-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.admin-action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Post stats */
+.post-stats {
+    color: #6c757d;
+}
+
+.post-stats i {
+    width: 16px;
+    text-align: center;
+}
+
+/* Category management modal */
+.list-group-item {
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.edit-category-btn,
+.delete-category-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Filter controls */
+.form-select,
+.form-control {
+    border-color: #dee2e6;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.posts-list .post-item {
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.posts-list .post-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.posts-list .post-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.posts-list .post-item:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* Active admin sidebar item */
+.list-group-item.active {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: auto;
+    background-color: #343a40;
+    color: white;
+    padding: 1.5rem 0;
+    width: 100%;
+}
+
+.footer .logo {
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Pagination */
+.pagination .page-link {
+    color: #6c757d;
+    border-color: #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #343a40;
+    border-color: #343a40;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #e9ecef;
+    color: #343a40;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .post-img {
+        height: 200px;
+    }
+
+    .admin-action-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+
+    .col-md-2.d-flex {
+        flex-direction: row;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .col-md-2.d-flex .admin-action-btn {
+        margin: 0 5px;
+        margin-bottom: 0 !important;
+    }
+
+    .col-md-7 {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+
+    .post-item .row {
+        flex-direction: column;
+    }
+
+    .posts-list .post-excerpt {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+}
+
+/* Modal styling */
+.modal-content {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.modal-footer {
+    border-top: 1px solid #f1f1f1;
+}
+
+/* Category edit/delete animations */
+@keyframes highlight {
+    0% {
+        background-color: #fffbea;
+    }
+    50% {
+        background-color: #fff8d6;
+    }
+    100% {
+        background-color: #f8f9fa;
+    }
+}
+
+.category-highlight {
+    animation: highlight 2s ease;
+}
+
+/* Category drag and drop styling */
+.draggable {
+    cursor: move;
+}
+
+.dragging {
+    opacity: 0.5;
+}
+
+.drop-zone {
+    border: 2px dashed #dee2e6;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+
+.drop-zone.active {
+    border-color: #0d6efd;
+    background-color: #e8f0ff;
+}
+
+/* Status badges for posts */
+.status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: normal;
+}
+
+.status-published {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-draft {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-reported {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* Form feedback styling */
+.invalid-feedback {
+    font-size: 0.8rem;
+}
+
+/* Tooltips */
+.tooltip-inner {
+    background-color: #343a40;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bs-tooltip-auto[data-popper-placement^='top'] .tooltip-arrow::before,
+.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #343a40;
+}
+
+/* Admin dashboard summary cards */
+.summary-card {
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
+}
+
+.summary-card .card-body {
+    padding: 1.5rem;
+}
+
+.summary-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.summary-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.summary-icon {
+    font-size: 2.5rem;
+    opacity: 0.1;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* Category count badge */
+.category-count {
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+    margin-left: 0.5rem;
+}

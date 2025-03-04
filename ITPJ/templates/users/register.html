@@ -1,60 +1,219 @@
-<head>THIS IS THE REGISTER PAGE</head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Register - Focus Photography Forum</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- Font Awesome for icons -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <!-- Common CSS -->
+        <link href="/static/css/common.css" rel="stylesheet" />
+        <!-- Page Specific CSS -->
+        <link href="/static/css/auth.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Header/Navbar -->
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm"
+        >
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'home' %}"
+                    ><img src="/static/img/Logo1.png" alt="Focus Logo"
+                /></a>
 
+                <!-- Navbar Toggler -->
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <div class="content">
-        <div class="container d-flex align-items-center justify-content-center">
-            <div class="card"
-                 style="max-width: 600px;
-                        width: 100%;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                        border-radius: 10px">
-                <div class="card-body p-5">
-                    <h1 class="text-center mb-4"
-                        style="color: #333333;
-                               font-size: 1.75rem;
-                               font-weight: 700">Register as a Customer</h1>
-                
-                
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="btn btn-primary me-3" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
+        <!-- Main Content -->
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card shadow">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h2 class="card-title mb-2">
+                                    Create an Account
+                                </h2>
+                                <p class="text-muted">
+                                    Join our photography community
+                                </p>
+                            </div>
 
-                    <form method="post">
-                        <input type="text" name="username" placeholder="insert username" required>
-                        <input type="text" name="email" placeholder="insert email" required>
-
-                        <input type="password" name="password1" placeholder="insert password" required>
-
-                        <input type="password" name="password2" placeholder="insert password again" required>
-
-                        {% csrf_token %}
-                        {% for field in form %}
-                            <div class="mb-3">
-                                <label for="{{ field.id_for_label }}"
-                                       class="form-label fw-bold"
-                                       style="color: #333333">{{ field.label }}</label>
-                            
-
-                                {% if field.errors %}
-                                    <div class="text-danger mt-1">
-                                        {% for error in field.errors %}<small>{{ error }}</small>{% endfor %}
+                            <form id="register" method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}"
+                                           class="form-label fw-bold"
+                                           style="color: #333333">{{ field.label }}</label>
+                                    
+                                    
+                                    <div class="input-group">
+                                        <input
+                                            class="form-control"
+                                            id="{{ field.id_for_label }}"
+                                            name="{{ field.name }}"
+                                            {% if field.field.widget.input_type == "password" %}
+                                                type="password"
+                                                value=""
+                                            {% elif field.field.widget.input_type == "email" %}
+                                                type="email"
+                                                value=""
+                                            {% elif field.field.widget.input_type == "number" %}
+                                                type="number"
+                                                value=""
+                                            {% else %}
+                                                type="text"
+                                                value=""
+                                            {% endif %}
+                                            required
+                                        />
+                                    </div>
+                                    
+                                    {% if field.errors %}
+                                        <div class="text-danger mt-1">
+                                            {% for error in field.errors %}<small>{{ error }}</small>{% endfor %}
+                                        </div>
+                                    {% endif %}
+    
+                                    {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
+                                </div>
+                                {% endfor %}
+        
+                                {% if form.non_field_errors %}
+                                    <div class="alert alert-danger mb-4">
+                                        <p class="mb-2">Please correct the following errors</p>
+                                        <ul class="mb-0">
+                                            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                                        </ul>
                                     </div>
                                 {% endif %}
+        
+                            
+                                <!-- Terms & Privacy Checkbox -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            id="agreeTerms"
+                                            required
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="agreeTerms"
+                                        >
+                                            I agree to the
+                                            <a
+                                                href="#"
+                                                class="text-decoration-none"
+                                                >Terms of Service</a
+                                            >
+                                            and
+                                            <a
+                                                href="#"
+                                                class="text-decoration-none"
+                                                >Privacy Policy</a
+                                            >
+                                        </label>
+                                    </div>
+                                </div>
 
-                                {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
-                            </div>
-                        {% endfor %}
+                                <!-- Register Button -->
+                                <div class="d-grid mb-4">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary py-2"
+                                    >
+                                        Create Account
+                                    </button>
+                                </div>
 
-                        {% if form.non_field_errors %}
-                            <div class="alert alert-danger mb-4">
-                                <p class="mb-2">Please correct the following errors</p>
-                                <ul class="mb-0">
-                                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
-                                </ul>
-                            </div>
-                        {% endif %}
-                    
-                        <button type="submit" class="btn btn-cr-dark w-100 mt-3">Register</button>
-                    </form>
+                                <!-- Login Link -->
+                                <div class="text-center">
+                                    <p class="mb-0">
+                                        Already have an account?
+                                        <a
+                                            href="{% url 'customer_login' %}"
+                                            class="text-decoration-none"
+                                            >Log In</a
+                                        >
+                                    </p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Footer -->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Connect With Us</h5>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-youtube"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <p class="small mb-0">
+                        © 2025 Focus Photography Forum. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS with Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom JS -->
+        <script src="/static/js/auth.js"></script>
+    </body>
+</html>

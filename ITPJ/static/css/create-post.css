@@ -1,0 +1,124 @@
+/* Create Post Page Specific Styles */
+
+/* Form elements */
+.form-control:focus,
+.form-select:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+/* Editor container */
+.editor-container {
+    position: relative;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.editor-container textarea {
+    border: none;
+    resize: vertical;
+    min-height: 300px;
+}
+
+.editor-container textarea:focus {
+    box-shadow: none;
+}
+
+/* Editor toolbar */
+.editor-toolbar {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ced4da;
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editor-toolbar .btn {
+    color: #495057;
+    transition: all 0.2s ease;
+}
+
+.editor-toolbar .btn:hover {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+/* Card styling */
+.card {
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Image preview section */
+#image-preview {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.preview-image-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.preview-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.preview-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-image:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Animation for page load */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .editor-toolbar {
+        flex-wrap: wrap;
+    }
+}
