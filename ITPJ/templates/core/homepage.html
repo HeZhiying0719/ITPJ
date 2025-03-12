@@ -8,13 +8,13 @@
 {% block right %}
     <div class="col-md-9">
                     <!-- Featured Posts (3 boxes at top) -->
-    <div class="row mb-4">
-    <div class="col-md-4">
+        <div class="row mb-4">
+            <div class="col-md-4">
 
-        <body>
-        <h1>post list</h1>
-        <ul>
-            {% for post in posts %}
+                <body>
+                <h1>post list</h1>
+                <ul>
+                {% for post in posts %}
                 <div class="card h-100">
                 <li>
                     <h2>{{ post.title }}</h2>
@@ -24,10 +24,10 @@
                     <small>last updated at: {{ post.updated_at }}</small>
                 </li>
                 </div>
-            {% endfor %}
-        </ul>
-    </body>
-    </div>
-    </div>
+                {% endfor %}
+                </ul>
+                </body>
+            </div>
+        </div>
     </div>
 {% endblock %}

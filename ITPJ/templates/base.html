@@ -108,8 +108,15 @@
                                             >
                                         </li>
                                         <li><hr class="dropdown-divider" /></li>
-                                        <li>
+                                        {% comment %} <li>
+                                            {% csrf_token %}
                                             <a class="dropdown-item" href="{% url 'customer_logout' %}">Logout</a>
+                                        </li> {% endcomment %}
+                                        <li>
+                                            <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
+                                                {% csrf_token %}
+                                            </form>
+                                            <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -221,8 +228,8 @@
                         >
                     </div>
                 </div>
-            </div>
-        </div>
+            {% comment %} </div>
+        </div>  {% endcomment %}
         {% endblock %}
         
         
