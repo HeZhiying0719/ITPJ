@@ -1,6 +1,9 @@
 from django.db import models
 from django.conf import settings
 import random
+from django.utils.translation import gettext_lazy as _
+from shapely.predicates import relate
+
 
 class Category(models.Model):
     category_id = models.IntegerField(unique=True, primary_key=True)
@@ -8,6 +11,18 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PostStatus(models.Model):
+    class Status(models.TextChoices):
+        BANED = ('baned', _('Baned'))
+        OKEY = ('okey', _('Okey'))
+        AUDITING = ('auditing', _('Auditing'))
+
+
+    status = models.CharField(max_length=20, choices=Status.choices)
+
+
 
 class Post(models.Model):
     post_id = models.CharField(max_length=8, unique=True, primary_key=True)
@@ -33,6 +48,9 @@ class Post(models.Model):
 
     like_num = models.IntegerField(default=0)
 
+    page_view = models.IntegerField(default=0)
+    post_status = models.ForeignKey(PostStatus, null=True, on_delete=models.SET_NULL, related_name='post_status')
+
 
 
     def save(self, *args, **kwargs):
@@ -45,6 +63,9 @@ class Post(models.Model):
             post_id = str(random.randint(10000000, 99999999))
             if not Post.objects.filter(post_id=post_id).exists():
                 return post_id
+
+    def defalt_status(self):
+        self.post_status = PostStatus.Status.AUDITING
 
 
 
