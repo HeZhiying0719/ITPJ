@@ -55,7 +55,8 @@
                 {% if not user.is_authenticated %}
                             <div id="go-to-login">
                             <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">LOG IN</a>
-                            </div>
+
+                        </div>
                 {% endif %}
 
 {#                    NOTIFICATION#}
@@ -145,20 +146,26 @@
                                             aria-labelledby="profileDropdown"
                                         >
                                             <li>
-                                                <a class="dropdown-item" href="admin-posts.html"
+                                                <a class="dropdown-item" href="/manager/posts/"
                                                     >Posts Management</a
                                                 >
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="admin-users.html"
+                                                <a class="dropdown-item" href="/manager/users/"
                                                     >Users Management</a
                                                 >
                                             </li>
                                             <li><hr class="dropdown-divider" /></li>
-                                            <li>
-                                                <a class="dropdown-item" href="index.html"
+                                            {% comment %} <li>
+                                                <a class="dropdown-item" href="/templates/core/homepage.html"
                                                     >Logout</a
                                                 >
+                                            </li> {% endcomment %}
+                                            <li>
+                                                <form id="logout-form" action="{%url 'manager_logout'%}" method="post" style="display: none;">
+                                                    {% csrf_token %}
+                                                </form>
+                                                <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
                                             </li>
                                         </ul>
                                     </div>
