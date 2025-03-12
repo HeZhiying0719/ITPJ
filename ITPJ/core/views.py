@@ -1,7 +1,8 @@
 import logging
 
-from django.shortcuts import redirect
-from django.views.generic import TemplateView
+from django.http import JsonResponse
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import TemplateView, DetailView
 from django.views import View
 from core.models import Post
 
@@ -18,11 +19,12 @@ class HomePageView(TemplateView):
         return context
 
 
-class PostDetailView(View):
-    #template_name = 'core/post_detail.html'
 
-    def post(self, request, post_id: int):
-        return redirect('post_detail', pk=Post.post_id)
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'core/postdetail.html'  # 详情页的模板
+    context_object_name = 'post'
 
 
 

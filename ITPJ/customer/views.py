@@ -14,13 +14,16 @@ from users.models import CustomUser
 from users.views import BaseUserLoginView
 from core.models import Post
 from customer.forms import PostCreationForm
+from customer.models import UserProfile
 
 class LoginView(BaseUserLoginView):
     success_url = reverse_lazy('customer_dashboard')
     user_type = CustomUser.Type.CUSTOMER
 
-class DashboardView(LoginRequiredMixin, TemplateView):
+class DashboardView(LoginRequiredMixin, CreateView):
+    model = UserProfile
     template_name = 'customers/dashboard.html'
+
 
 
 

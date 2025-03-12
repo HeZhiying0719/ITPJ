@@ -22,6 +22,10 @@ class PostStatus(models.Model):
 
     status = models.CharField(max_length=20, choices=Status.choices)
 
+    def __str__(self):
+        return self.status
+
+
 
 
 class Post(models.Model):
@@ -64,7 +68,7 @@ class Post(models.Model):
             if not Post.objects.filter(post_id=post_id).exists():
                 return post_id
 
-    def defalt_status(self):
+    def default_status(self):
         self.post_status = PostStatus.Status.AUDITING
 
 
