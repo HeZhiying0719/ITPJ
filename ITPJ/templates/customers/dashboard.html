@@ -2,6 +2,194 @@
 {% load static %}
 
 {% block right %}
-  
+ 
+    <div class="col-md-9">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h2 class="mb-4">My Account</h2>
+
+                            <form id="profile-form">
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <label class="form-label"
+                                            >Avatar:</label
+                                        >
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="avatar-container mb-3">
+                                            <div class="profile-avatar">
+                                                <img
+                                                    src="/img/default-user.png"
+                                                    alt="User Avatar"
+                                                    class="rounded-circle"
+                                                />
+                                                <div class="avatar-overlay">
+                                                    <i
+                                                        class="fas fa-camera"
+                                                    ></i>
+                                                </div>
+                                            </div>
+                                            <input
+                                                type="file"
+                                                id="avatar-upload"
+                                                accept="image/*"
+                                                class="d-none"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <label for="username" class="form-label"
+                                            >Name:</label
+                                        >
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="username"
+                                            value="Tom"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <label for="bio" class="form-label"
+                                            >Brief Introduction:</label
+                                        >
+                                    </div>
+                                    <div class="col-md-9">
+                                        <textarea
+                                            class="form-control"
+                                            id="bio"
+                                            rows="9"
+                                            placeholder="Tell us a bit about yourself..."
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="d-flex justify-content-between align-items-center"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-secondary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#changePasswordModal"
+                                    >
+                                        Change Password
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+        <!-- Change Password Modal -->
+        <div
+            class="modal fade"
+            id="changePasswordModal"
+            tabindex="-1"
+            aria-labelledby="changePasswordModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordModalLabel">
+                            Change Password
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="password-form">
+                            <div class="mb-3">
+                                <label for="current-password" class="form-label"
+                                    >Current Password</label
+                                >
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="current-password"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-password" class="form-label"
+                                    >New Password</label
+                                >
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="new-password"
+                                    required
+                                />
+                                <div class="password-strength mt-2">
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 0%"
+                                            aria-valuenow="0"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <small class="text-muted"
+                                        >Password strength:
+                                        <span id="password-strength-text"
+                                            >Weak</span
+                                        ></small
+                                    >
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm-password" class="form-label"
+                                    >Confirm New Password</label
+                                >
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="confirm-password"
+                                    required
+                                />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="save-password"
+                        >
+                            Save Password
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
                
 {% endblock %}

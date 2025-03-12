@@ -6,23 +6,28 @@
 {#{% endblock %}#}
 
 {% block right %}
+
     <div class="col-md-9">
                     <!-- Featured Posts (3 boxes at top) -->
-    <div class="row mb-4">
-    <div class="col-md-4">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
 
         <body>
         <h1>post list</h1>
         <ul>
             {% for post in posts %}
                 <div class="card h-100">
+                <a href="{% url 'post_detail' post.post_id %}">
                 <li>
                     <h2>{{ post.title }}</h2>
                     <p>{{ post.content }}</p>
                     <a>{{ post.image }}</a>
                     <small>post time: {{ post.created_at }}</small>
                     <small>last updated at: {{ post.updated_at }}</small>
+                    <small>{{ post.like_num}} likes</small>
+                    <small>{{ post.page_view }} views</small>
                 </li>
+                </a>
                 </div>
             {% endfor %}
         </ul>
@@ -30,4 +35,31 @@
     </div>
     </div>
     </div>
+
+
+    
 {% endblock %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".like-btn").forEach(button => {
+        button.addEventListener("click", function() {
+            let postId = this.dataset.postId;  // 获取帖子 ID
+            let likeCountSpan = document.getElementById(`like-count-${postId}`);
+
+            fetch(`/post/${postId}/like/`, { 
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                likeCountSpan.innerText = data.like_num;  // 更新点赞数
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+});
+</script>
