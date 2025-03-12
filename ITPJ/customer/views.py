@@ -1,4 +1,3 @@
-from Demos.win32ts_logoff_disconnected import username
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
@@ -22,6 +21,8 @@ class LoginView(BaseUserLoginView):
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'customers/dashboard.html'
+
+
 
 class PostingView(LoginRequiredMixin, CreateView):
     model = Post
