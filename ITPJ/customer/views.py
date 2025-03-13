@@ -20,8 +20,8 @@ class LoginView(BaseUserLoginView):
     success_url = reverse_lazy('customer_dashboard')
     user_type = CustomUser.Type.CUSTOMER
 
-class DashboardView(LoginRequiredMixin, CreateView):
-    model = UserProfile
+class DashboardView(LoginRequiredMixin, TemplateView):
+    #model = UserProfile
     template_name = 'customers/dashboard.html'
 
 
