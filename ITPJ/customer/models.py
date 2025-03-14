@@ -10,7 +10,7 @@ class UserProfile(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_profile'
     )
 
-    avatar = models.ImageField(upload_to='media/avatars', null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
     introduction = models.TextField(null=True, blank=True)
 

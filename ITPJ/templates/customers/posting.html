@@ -6,16 +6,34 @@
                         <div class="card-body p-4">
                             <h2 class="mb-4">Create post</h2>
 
-                            <form id="register" method="post">
+                            <form id="register" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {% for field in form %}
-                                <div class="mb-3">
+                                {% if field.label == "Photo" %}
+                                    <div class="mb-3">
                                     <label for="{{ field.id_for_label }}"
                                            class="form-label fw-bold"
                                            style="color: #333333">{{ field.label }}</label>
                                     
                                     
                                     <div class="input-group">
+                                        
+                                        <input type="file" name="photo" accept="image/*">
+                                        
+                                    </div>
+                                    
+                                    </div>
+{#                                {% elif field.label == "Category1"%}#}
+                                
+                                {% else %}
+                                    <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}"
+                                           class="form-label fw-bold"
+                                           style="color: #333333">{{ field.label }}</label>
+                                    
+                                    
+                                    <div class="input-group">
+                                        
                                         <input
                                             class="form-control"
                                             id="{{ field.id_for_label }}"
@@ -24,9 +42,13 @@
                                             value=""
                                             
                                         />
+                                        
                                     </div>
                                     
                                     </div>
+                                    
+                                    
+                                {% endif %}
                                 {% endfor %}
 
                                 <!-- Post Button -->

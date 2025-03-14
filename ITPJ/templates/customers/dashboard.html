@@ -8,6 +8,9 @@
                         <div class="card-body p-4">
                             <h2 class="mb-4">My Account</h2>
 
+                            {% for profile in user_profile %}
+                                
+                            
                             <form id="profile-form">
                                 <div class="row mb-4">
                                     <div class="col-md-3">
@@ -15,18 +18,14 @@
                                             >Avatar:</label
                                         >
                                     </div>
+                                    
                                     <div class="col-md-9">
                                         <div class="avatar-container mb-3">
                                             <div class="profile-avatar">
-                                                <img
-                                                    src="/img/default-user.png"
-                                                    alt="User Avatar"
-                                                    class="rounded-circle"
-                                                />
+                                                <img src="{{ profile.avatar.url }}"  alt="Post Image" class="avatar">
                                                 <div class="avatar-overlay">
-                                                    <i
-                                                        class="fas fa-camera"
-                                                    ></i>
+                                                    <label for="fileInput" class="fas fa-camera">change your avatar</label>
+                                                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
                                                 </div>
                                             </div>
                                             <input
@@ -46,12 +45,7 @@
                                         >
                                     </div>
                                     <div class="col-md-9">
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="username"
-                                            value="Tom"
-                                        />
+                                        <label></label>
                                     </div>
                                 </div>
 
@@ -90,6 +84,7 @@
                                     </button>
                                 </div>
                             </form>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

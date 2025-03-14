@@ -86,20 +86,30 @@
                                         aria-expanded="false"
                                     >
 {#                                        FINDING THE PATH TO THE CUSTOMER AVATAR#}
-                                        {% if user.avatar == null %}
+                                        {% if user.user_profile.avatar.url == null %}
                                         <img
                                             src="/static/img/default-user.png"
                                             alt="Profile"
                                             class="avatar"
                                         />
+                                        {% else %}
+                                            <img
+                                            src="{{ user.user_profile.avatar.url }}"
+                                            alt="Profile"
+                                            class="avatar"
+                                        />
                                         {% endif %}
+                                        
+                                            
+                                        
+                                        
                                     </a>
                                     <ul
                                         class="dropdown-menu dropdown-menu-end"
                                         aria-labelledby="profileDropdown"
                                     >
                                         <li>
-                                            <a class="dropdown-item" href="mypost.html"
+                                            <a class="dropdown-item" href="{% url 'my_posts' %}"
                                                 >My Posts</a
                                             >
                                         </li>
@@ -183,7 +193,7 @@
                 <div class="col-md-3 category-nav">
                     <div class="list-group mb-4" id="categoriesList">
                         <a
-                            href="#"
+                            href="{% url 'home' %}"
                             class="list-group-item list-group-item-action active"
                             data-category="all"
                             >ALL</a
@@ -273,8 +283,8 @@
         <!-- Bootstrap JS with Popper -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <!-- Common navigation JS -->
-        <script src="/static/js/common-navigation.js"></script>
+{#        <script src="/static/js/common-navigation.js"></script>#}
         <!-- Custom JS -->
-        <script src="/static/js/index.js"></script>
+{#        <script src="/static/js/index.js"></script>#}
     </body>
 </html>
