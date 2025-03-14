@@ -19,9 +19,12 @@ class ManagerLoginView(BaseUserLoginView):
     success_url = reverse_lazy('manager_dashboard')
     user_type = CustomUser.Type.MANAGER
     
+# class ManagerDashboardView(LoginRequiredMixin, TemplateView):
+#     template_name = "managers/manager_posts.html"
     
-class ManagerDashboardView(LoginRequiredMixin, TemplateView):
-    template_name = 'managers/manager_posts.html'
+def manager_dashboard(request):
+    context_dict = {}
+    return render(request, 'managers/manager_posts.html', context=context_dict)
 
 def manage_post(request):
     context_dict = {}
@@ -31,7 +34,6 @@ def manage_user(request):
     context_dict = {}
     return render(request, 'managers/manager_users.html', context=context_dict)
     
-# class PostInfoView(LoginRequiredMixin, CreateView):
-#     model = Post
+
     
 
