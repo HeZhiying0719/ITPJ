@@ -33,9 +33,10 @@
             rel="stylesheet"
         />
         <!-- Common CSS -->
-        <link href="/css/common.css" rel="stylesheet" />
+        <link href="/static/css/common.css" rel="stylesheet" />
         <!-- Page Specific CSS -->
-        <link href="/css/admin-posts.css" rel="stylesheet" />
+        <link href="/static/css/admin-posts.css" rel="stylesheet" />
+
     </head>
     <body>
         <!-- Header/Navbar -->
@@ -44,11 +45,11 @@
         >
             <div class="container">
                 <!-- Logo -->
-                <a class="navbar-brand" href="/homepage.html"
-                    ><img src="/img/Logo1.png" alt="Focus Logo"
+                <a class="navbar-brand" href="{% url 'home' %}" 
+                    ><img src="/static/img/Logo1.png" alt="Focus Logo"
                 /></a>
 
-                <!-- Search Box -->
+                {% comment %} <!-- Search Box -->
                 <form class="search-form d-flex ms-auto me-3">
                     <div class="input-group">
                         <input
@@ -61,11 +62,11 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form>
+                </form> {% endcomment %}
 
                 <!-- Admin Icons -->
                 <div class="d-flex align-items-center">
-                    <div class="nav-item me-3 position-relative">
+                    {% comment %} <div class="nav-item me-3 position-relative">
                         <a href="notification.html" class="nav-link">
                             <i class="fas fa-bell fa-lg"></i>
                             <span
@@ -74,7 +75,7 @@
                                 3
                             </span>
                         </a>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="nav-item dropdown">
                         <a
                             href="#"
@@ -85,7 +86,7 @@
                             aria-expanded="false"
                         >
                             <img
-                                src="static\img\default-user.png"
+                                src="\static\img\default-user.png"
                                 alt="Profile"
                                 class="avatar"
                             />
@@ -108,10 +109,16 @@
                                 >
                             </li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li>
+                            {% comment %} <li>
                                 <a class="dropdown-item" href="/core/homepage.html"
                                     >Logout</a
                                 >
+                            </li> {% endcomment %}
+                            <li>
+                                <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -174,7 +181,7 @@
                             <div class="row g-0">
                                 <div class="col-md-3">
                                     <img
-                                        src="/img/dog.jpeg"
+                                        src="/static/img/dog.jpeg"
                                         class="img-fluid rounded-start post-img w-100 h-100"
                                         alt="Post image"
                                     />

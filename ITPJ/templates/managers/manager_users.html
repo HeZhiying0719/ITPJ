@@ -33,9 +33,9 @@
             rel="stylesheet"
         />
         <!-- Common CSS -->
-        <link href="/css/common.css" rel="stylesheet" />
+        <link href="/static/css/common.css" rel="stylesheet" />
         <!-- Page Specific CSS -->
-        <link href="/css/admin-users.css" rel="stylesheet" />
+        <link href="/static/css/admin-users.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Header/Navbar -->
@@ -45,11 +45,11 @@
             <div class="container">
                 <!-- Logo -->
                 <a class="navbar-brand" href="/index.html"
-                    ><img src="/img/Logo1.png" alt="Focus Logo"
+                    ><img src="/static/img/Logo1.png" alt="Focus Logo"
                 /></a>
 
                 <!-- Search Box -->
-                <form class="search-form d-flex ms-auto me-3">
+                {% comment %} <form class="search-form d-flex ms-auto me-3">
                     <div class="input-group">
                         <input
                             class="form-control"
@@ -61,11 +61,11 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form>
+                </form> {% endcomment %}
 
                 <!-- Admin Icons -->
                 <div class="d-flex align-items-center">
-                    <div class="nav-item me-3 position-relative">
+                    {% comment %} <div class="nav-item me-3 position-relative">
                         <a href="notification.html" class="nav-link">
                             <i class="fas fa-bell fa-lg"></i>
                             <span
@@ -74,7 +74,7 @@
                                 3
                             </span>
                         </a>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="nav-item dropdown">
                         <a
                             href="#"
@@ -85,7 +85,7 @@
                             aria-expanded="false"
                         >
                             <img
-                                src="/img/default-user.png"
+                                src="/static/img/default-user.png"
                                 alt="Profile"
                                 class="avatar"
                             />
@@ -94,28 +94,34 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="profileDropdown"
                         >
-                            <li>
+                            {% comment %} <li>
                                 <a
                                     class="dropdown-item"
                                     href="admin-dashboard.html"
                                     >Dashboard</a
                                 >
-                            </li>
+                            </li> {% endcomment %}
                             <li>
-                                <a class="dropdown-item" href="admin-posts.html"
+                                <a class="dropdown-item" href="/manager/posts/"
                                     >Posts Management</a
                                 >
                             </li>
                             <li>
-                                <a class="dropdown-item" href="admin-users.html"
+                                <a class="dropdown-item" href="/manager/users/"
                                     >Users Management</a
                                 >
                             </li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li>
+                            {% comment %} <li>
                                 <a class="dropdown-item" href="index.html"
                                     >Logout</a
                                 >
+                            </li> {% endcomment %}
+                            <li>
+                                <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -130,12 +136,12 @@
                 <div class="col-md-3 category-nav">
                     <div class="list-group mb-4">
                         <a
-                            href="admin-posts.html"
+                            href="/manager/posts/"
                             class="list-group-item list-group-item-action"
                             >Posts Management</a
                         >
                         <a
-                            href="admin-users.html"
+                            href="/manager/users/"
                             class="list-group-item list-group-item-action active"
                             >Users Management</a
                         >
