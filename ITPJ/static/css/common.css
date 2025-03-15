@@ -54,6 +54,13 @@ body {
     object-fit: cover;
 }
 
+.avatarBig {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 /* Search Form */
 .search-form {
     width: 100%;

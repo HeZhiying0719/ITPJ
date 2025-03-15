@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, DetailView
 from django.views import View
 from sympy.integrals.meijerint_doc import category
 from django.db.models import Q
-from core.models import Post
+from core.models import Post, Comment
 
 logger = logging.getLogger(__name__)
 
@@ -55,10 +55,6 @@ class HomePageEquipmentView(TemplateView):
 
 
 
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'core/postdetail.html'  # 详情页的模板
-    context_object_name = 'post'
 
 
 
