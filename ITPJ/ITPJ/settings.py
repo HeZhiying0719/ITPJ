@@ -14,15 +14,6 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-<<<<<<< HEAD
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),  # 确保 static 目录路径正确
-# ]
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-STATICFILES_DIRS = [STATIC_DIR, MEDIA_DIR]
-=======
->>>>>>> c45762bf9e12610de3e8f148b3f5994b91c28e44
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -87,17 +78,17 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 
 # Database
 
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#         'NAME': 'ITPJ',
-#         'USER': 'root',
-#         'PASSWORD': '123456',
-#     }
-# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'NAME': 'ITPJ',
+        'USER': 'root',
+        'PASSWORD': '123456',
+    }
+}
 
 
 
