@@ -6,7 +6,6 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-
-# pycache
+#pycache
 __pycache__/
-*/migrations/__pycache__/
+*.pyc

@@ -7,7 +7,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('core', '0005_remove_blog_category1_remove_blog_category2_and_more'),
-        ('customer', '0006_alter_favicon_blog_id'),
     ]
 
     operations = [

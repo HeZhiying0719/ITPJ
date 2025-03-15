@@ -67,6 +67,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
             ],
         },
     },
@@ -76,18 +77,19 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#         'NAME': 'ITPJ',
-#         'USER': 'root',
-#         'PASSWORD': '123456',
-#     }
-# }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'NAME': 'ITPJ',
+        'USER': 'root',
+        'PASSWORD': '123456',
+    }
+}
+
 
 
 # Password validation
