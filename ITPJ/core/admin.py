@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Post, Category, Comment
+from core.models import Post, Category, Comment, PostStatus
 
 
 @admin.register(Post)
@@ -18,6 +18,7 @@ class PostAdmin(admin.ModelAdmin):
         'created_at',
         'updated_at',
         'like_num',
+        'page_view',
     )
     readonly_fields = ('post_id',)
 
@@ -39,4 +40,11 @@ class PostAdmin(admin.ModelAdmin):
         'like_num',
     )
     readonly_fields = ('comment_id',)
+
+
+@admin.register(PostStatus)
+class PostStatusAdmin(admin.ModelAdmin):
+    list_display = (
+        'status',
+    )
 

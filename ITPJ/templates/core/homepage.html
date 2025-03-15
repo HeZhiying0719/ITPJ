@@ -6,28 +6,65 @@
 {#{% endblock %}#}
 
 {% block right %}
+
     <div class="col-md-9">
                     <!-- Featured Posts (3 boxes at top) -->
-        <div class="row mb-4">
-            <div class="col-md-4">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
 
-                <body>
-                <h1>post list</h1>
-                <ul>
-                {% for post in posts %}
-                <div class="card h-100">
-                <li>
-                    <h2>{{ post.title }}</h2>
-                    <p>{{ post.content }}</p>
-                    <a>{{ post.image }}</a>
-                    <small>post time: {{ post.created_at }}</small>
-                    <small>last updated at: {{ post.updated_at }}</small>
-                </li>
+        <body>
+        <h1>post list</h1>
+        <ul>
+            {% for post in posts %}
+{#                <div class="card h-100">#}
+{#                <a href="{% url 'post_detail' post.post_id %}">#}
+{#                <li>#}
+{#                    {% if post.photo %}#}
+{#                    <img src="{{ post.photo.url }}" alt="Post Image">#}
+{#                    {% endif %}#}
+{#                    <h2>{{ post.title }}</h2>#}
+{#                    <p>{{ post.content }}</p>#}
+{#                    #}
+{#                    #}
+{#                   #}
+{#                    <small>post time: {{ post.created_at }}</small>#}
+{#                    <small>last updated at: {{ post.updated_at }}</small>#}
+{#                    <small>{{ post.like_num}} likes</small>#}
+{#                    <small>{{ post.page_view }} views</small>#}
+{#                </li>#}
+{#                </a>#}
+{#                </div>#}
+{#                #}
+                <div class="col-md-4">
+                <a href="{% url 'post_detail' post.post_id %}">
+                            <div class="card h-100">
+                            
+                                {% if post.photo %}
+                                <img src="{{ post.photo.url }}" alt="Post Image">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        {{ post.title }}
+                                    </h6>
+                                    <div
+                                        class="d-flex justify-content-between align-items-center mt-2"
+                                    >
+                                        <small class="text-muted"
+                                            >By {{ post.user.username }}</small
+                                        >
+                                        <small>post time: {{ post.created_at }}</small>
+                                        <small>last updated at: {{ post.updated_at }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                </a>
                 </div>
-                {% endfor %}
-                </ul>
-                </body>
-            </div>
-        </div>
+                        
+            {% endfor %}
+        </ul>
+    </body>
+    </div>
+    </div>
+
     </div>
 {% endblock %}

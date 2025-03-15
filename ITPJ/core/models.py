@@ -22,6 +22,10 @@ class PostStatus(models.Model):
 
     status = models.CharField(max_length=20, choices=Status.choices)
 
+    def __str__(self):
+        return self.status
+
+
 
 
 class Post(models.Model):
@@ -36,7 +40,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.TextField(max_length=100, null=False, blank=False)
 
-    photo = models.ImageField(upload_to='media/post_photos', null=True, blank=True)
+    photo = models.ImageField(upload_to='post_photos/', null=True, blank=True)
 
     content = models.TextField(max_length=500, null=False, blank=True)
 
@@ -64,7 +68,7 @@ class Post(models.Model):
             if not Post.objects.filter(post_id=post_id).exists():
                 return post_id
 
-    def defalt_status(self):
+    def default_status(self):
         self.post_status = PostStatus.Status.AUDITING
 
 
@@ -72,11 +76,11 @@ class Post(models.Model):
 class Comment(models.Model):
     comment_id = models.CharField(max_length=10, unique=True, primary_key=True)
 
-    post_id = models.OneToOneField(
-        Post, on_delete=models.CASCADE, related_name='post_of_comment'
+    post = models.ForeignKey(
+        Post, null=True, on_delete=models.CASCADE, related_name='post_of_comment'
     )
 
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_of_comment'
     )
     created_at = models.DateTimeField(auto_now_add=True)

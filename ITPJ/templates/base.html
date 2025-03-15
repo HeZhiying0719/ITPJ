@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Focus - Photography Forum</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- Font Awesome for icons -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <!-- Common CSS -->
+        <link href="/static/css/common.css" rel="stylesheet" />
+        <!-- Page Specific CSS -->
+        <link href="/static/css/index.css" rel="stylesheet" />
+    </head>
+    
+        <!-- Header/Navbar -->
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm"
+        >
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'home' %}"
+                    ><img src="/static/img/Logo1.png" alt="Focus Logo"
+                /></a>
+
+                <!-- Search Box -->
+                <form class="search-form d-flex ms-auto me-3">
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            type="search"
+                            placeholder="Search posts..."
+                            aria-label="Search"
+                        />
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Create Button and Icons -->
+                <div class="d-flex align-items-center">
+                    <a href="{% url 'customer_posting_view' %}">
+                        <button class="btn btn-primary me-3">CREATE</button>
+                    </a>
+                {% if not user.is_authenticated %}
+                            <div id="go-to-login">
+                            <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">LOG IN</a>
+
+                        </div>
+                {% endif %}
+
+{#                    NOTIFICATION#}
+{#                    <div class="nav-item me-3 position-relative">#}
+{#                        <a href="#" class="nav-link">#}
+{#                            <i class="fas fa-bell fa-lg"></i>#}
+{#                            <span#}
+{#                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"#}
+{#                            >#}
+{#                                3#}
+{#                            </span>#}
+{#                        </a>#}
+{##}
+{##}
+{#                    </div>#}
+                    <!-- User Profile/Login Button (this will change based on login state) -->
+                
+                    <ul class="navbar-nav">
+                        
+                        {% if user.is_authenticated %}
+                            {% if user.type == 'customer' %}
+                                <div class="nav-item dropdown">
+                                    <a
+                                        href="#"
+                                        class="nav-link dropdown-toggle"
+                                        id="profileDropdown"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+{#                                        FINDING THE PATH TO THE CUSTOMER AVATAR#}
+                                        {% if user.user_profile.avatar.url == null %}
+                                        <img
+                                            src="/static/img/default-user.png"
+                                            alt="Profile"
+                                            class="avatar"
+                                        />
+                                        {% else %}
+                                            <img
+                                            src="{{ user.user_profile.avatar.url }}"
+                                            alt="Profile"
+                                            class="avatar"
+                                        />
+                                        {% endif %}
+                                        
+                                            
+                                        
+                                        
+                                    </a>
+                                    <ul
+                                        class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="profileDropdown"
+                                    >
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'my_posts' %}"
+                                                >My Posts</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'customer_dashboard' %}"
+                                                >Profile</a
+                                            >
+                                        </li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        
+                                        <li>
+                                            <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
+                                                {% csrf_token %}
+                                            </form>
+                                            <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                            {% elif user.type == 'manager' %}
+                                 <!-- Admin Icons -->
+                                <div class="d-flex align-items-center">
+                                    
+                                    <div class="nav-item dropdown">
+                                        <a
+                                            href="#"
+                                            class="nav-link dropdown-toggle"
+                                            id="profileDropdown"
+                                            role="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                            <img
+                                                src="/img/default-user.png"
+                                                alt="Profile"
+                                                class="avatar"
+                                            />
+                                        </a>
+                                        <ul
+                                            class="dropdown-menu dropdown-menu-end"
+                                            aria-labelledby="profileDropdown"
+                                        >
+                                            <li>
+                                                <a class="dropdown-item" href="/manager/posts/"
+                                                    >Posts Management</a
+                                                >
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="/manager/users/"
+                                                    >Users Management</a
+                                                >
+                                            </li>
+                                            <li><hr class="dropdown-divider" /></li>
+                                            {% comment %} <li>
+                                                <a class="dropdown-item" href="/templates/core/homepage.html"
+                                                    >Logout</a
+                                                >
+                                            </li> {% endcomment %}
+                                            <li>
+                                                <form id="logout-form" action="{%url 'manager_logout'%}" method="post" style="display: none;">
+                                                    {% csrf_token %}
+                                                </form>
+                                                <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            {% endif %} 
+                        {% endif %}
+                        
+                    </ul>
+                
+                    
+                </div>
+            </div>
+        
+        </nav>
+
+        <!-- Main Content -->
+        {% block left %}
+
+        <div class="container py-4">
+            <div class="row">
+                <!-- about - Categories -->
+                <div class="col-md-3 category-nav">
+                    <div class="list-group mb-4" id="categoriesList">
+                        <a
+                            href="{% url 'home' %}"
+                            class="list-group-item list-group-item-action active"
+                            data-category="all"
+                            >ALL</a
+                        >
+                        <a
+                            href="{% url 'equipment' %}"
+                            class="list-group-item list-group-item-action"
+                            data-category="equipment"
+                            >Equipment</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="photography"
+                            >Photography</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="sharing"
+                            >Sharing</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="events"
+                            >Events</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="problem-solving"
+                            >Problem Solving</a
+                        >
+                    </div>
+                    <div class="mt-5">
+                        <a
+                            href="/pages/about-us.html"
+                            class="btn btn-outline-secondary w-100"
+                            >About us</a
+                        >
+                    </div>
+                </div>
+
+        {% endblock %}
+        
+        
+        {% block right %}
+
+        {% endblock %}
+
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Connect With Us</h5>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-youtube"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <p class="small mb-0">
+                        © 2025 Focus Photography Forum. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS with Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Common navigation JS -->
+{#        <script src="/static/js/common-navigation.js"></script>#}
+        <!-- Custom JS -->
+{#        <script src="/static/js/index.js"></script>#}
+    </body>
+</html>

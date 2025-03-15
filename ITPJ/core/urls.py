@@ -1,8 +1,10 @@
 from django.urls import path
 
-from core.views import HomePageView, PostDetailView
+from core.views import HomePageView, HomePageEquipmentView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
-    #path('<int:post_id>', PostDetailView.as_view(), name='post_detail')
+    path('equipment/', HomePageEquipmentView.as_view(), name='equipment'),
+
+
 ]

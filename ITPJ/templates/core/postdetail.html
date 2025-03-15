@@ -1,0 +1,437 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{#{% block left %}#}
+{#    #}
+{#{% endblock %}#}
+
+{% block right %}
+    
+    <div class="col-md-9">
+                    
+
+                    <!-- Post Details Card -->
+                    <div class="card post-card mb-4">
+                        <div class="card-body">
+                            <div
+                                class="d-flex justify-content-between align-items-start mb-3"
+                            >
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ post.user.user_profile.avatar.url }}" alt="Post Image" class="avatar">
+                                    <div>
+                                        <h6 class="mb-0">   {{ post.user.username }}</h6>
+                                        <small class="text-muted"
+                                            >   Posted on {{ post.updated_at }} •
+                                            {{ post.category1 }} • {{ post.category2 }} • {{ post.category3 }} • {{ post.category4 }}</small
+                                        >
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button
+                                        class="btn btn-sm btn-light"
+                                        type="button"
+                                        id="postOptionsDropdown"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul
+                                        class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="postOptionsDropdown"
+                                    >
+                                        <!-- <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Edit</a></li> -->
+                                        <li>
+                                            <a
+                                                class="dropdown-item text-danger"
+                                                href="#"
+                                                id="deletePostBtn"
+                                                ><i
+                                                    class="fas fa-trash me-2"
+                                                ></i
+                                                >Delete</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#"
+                                                ><i class="fas fa-flag me-2"></i
+                                                >Report</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h1 class="post-title mb-3">
+                                {{ post.title }}
+                            </h1>
+
+                            <div class="post-content">
+                                {% if post.photo %}
+                                <img src="{{ post.photo.url }}" alt="Post Image">
+                                {% endif %}
+                                
+                            </div>
+                            <div class="comment-content mt-2">
+                                <p>
+                                    {{ post.content }}
+                                </p>
+                                
+                            </div>
+
+                            <div
+                                class="post-actions d-flex justify-content-between align-items-center mt-4 pt-3 border-top"
+                            >
+                                <div class="d-flex align-items-center">
+                                    <button
+                                        class="btn btn-link p-0 text-decoration-none like-button me-3"
+                                        id="likeButton"
+                                    >
+                                        <i class="far fa-heart me-1"></i>
+                                        <span id="likeCount">{{ post.like_num }}</span> Likes
+                                    </button>
+                                    <button
+                                        class="btn btn-link p-0 text-decoration-none me-3"
+                                    >
+                                        <i class="far fa-comment me-1"></i>
+                                        <span>{{ comment_count }}</span> Comments
+                                    </button>
+                                    <button
+                                        class="btn btn-link p-0 text-decoration-none"
+                                    >
+                                        <i class="far fa-eye me-1"></i>
+                                        <span>{{ post.page_view }}</span> Views
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comment Section -->
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Comments ({{ comment_count }})</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Comment Form -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="comment-form mb-4">
+                                <div class="d-flex mb-3">
+                                    <img
+                                        src="{{ user.user_profile.avatar.url }}"
+                                        alt="Your Avatar"
+                                        class="avatar"
+                                    />
+                                    <div class="flex-grow-1">
+                                        <textarea
+                                            class="form-control"
+                                            id="commentText"
+                                            name="content"
+                                            rows="3"
+                                            placeholder="Write a comment..."
+                                        >{{ form.content }}</textarea>
+                                        
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary btn-sm"
+                                            id="postCommentBtn"
+                                        >
+                                            Post Comment
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="imagePreview" class="mt-3 d-none">
+                                    <div
+                                        class="position-relative d-inline-block"
+                                    >
+                                        <img
+                                            src=""
+                                            alt="Preview"
+                                            class="rounded img-thumbnail"
+                                            style="max-height: 150px"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-danger position-absolute top-0 end-0 remove-image"
+                                        >
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                            <!-- Comments List -->
+                            <div class="comments-list">
+                            
+                                <!-- Comment 1 -->
+                            {% for comment in comments %}
+                                <div class="comment mb-4">
+                                    <div class="d-flex">
+                                        <img
+                                            src="{{ comment.user.user_profile.avatar.url }}"
+                                            alt="Commenter Avatar"
+                                            class="avatar"
+                                        />
+                                        <div class="flex-grow-1">
+                                            <div
+                                                class="d-flex justify-content-between align-items-start"
+                                            >
+                                                <div>
+                                                    <h6 class="mb-0">
+                                                        {{ comment.user }}
+                                                    </h6>
+                                                    <small class="text-muted"
+                                                        >{{ comment.created_at }}</small
+                                                    >
+                                                </div>
+                                                <div class="dropdown">
+                                                    <button
+                                                        class="btn btn-sm btn-light"
+                                                        type="button"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                    >
+                                                        <i
+                                                            class="fas fa-ellipsis-v"
+                                                        ></i>
+                                                    </button>
+                                                    <ul
+                                                        class="dropdown-menu dropdown-menu-end"
+                                                    >
+                                                        <li>
+                                                            <a
+                                                                class="dropdown-item"
+                                                                href="#"
+                                                                ><i
+                                                                    class="fas fa-reply me-2"
+                                                                ></i
+                                                                >Reply</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                class="dropdown-item text-danger"
+                                                                href="#"
+                                                                ><i
+                                                                    class="fas fa-flag me-2"
+                                                                ></i
+                                                                >Report</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="comment-content mt-2">
+                                                <p>
+                                                    {{ comment.content }}
+                                                </p>                                             
+                                            </div>
+                                            <div class="comment-actions mt-2">
+                                                <button
+                                                    class="btn btn-sm btn-link text-decoration-none p-0 me-3"
+                                                >
+                                                    <i
+                                                        class="far fa-heart me-1"
+                                                    ></i>
+                                                    {{ comment.like_num }} Likes
+                                                </button>
+                                                <button
+                                                    class="btn btn-sm btn-link text-decoration-none p-0 reply-btn"
+                                                >
+                                                    <i
+                                                        class="fas fa-reply me-1"
+                                                    ></i>
+                                                    Reply
+                                                </button>
+                                            </div>
+
+{#                                            <!-- Reply Form (initially hidden) -->#}
+{#                                            <div class="reply-form mt-3 d-none">#}
+{#                                                <textarea#}
+{#                                                    class="form-control mb-2"#}
+{#                                                    rows="2"#}
+{#                                                    placeholder="Write a reply..."#}
+{#                                                ></textarea>#}
+{#                                                <div#}
+{#                                                    class="d-flex justify-content-between"#}
+{#                                                >#}
+{#                                                    <label#}
+{#                                                        for="replyImage"#}
+{#                                                        class="btn btn-outline-secondary btn-sm"#}
+{#                                                    >#}
+{#                                                        <i#}
+{#                                                            class="fas fa-image"#}
+{#                                                        ></i>#}
+{#                                                        Add Image#}
+{#                                                    </label>#}
+{#                                                    <input#}
+{#                                                        type="file"#}
+{#                                                        id="replyImage"#}
+{#                                                        class="d-none"#}
+{#                                                        accept="image/*"#}
+{#                                                    />#}
+{#                                                    <button#}
+{#                                                        class="btn btn-primary btn-sm"#}
+{#                                                    >#}
+{#                                                        Reply#}
+{#                                                    </button>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{##}
+{#                                            <!-- Replies -->#}
+{#                                            <div class="replies mt-3">#}
+{#                                                <div class="reply">#}
+{#                                                    <div class="d-flex">#}
+{#                                                        <img#}
+{#                                                            src="/img/default-user.png"#}
+{#                                                            alt="Replier Avatar"#}
+{#                                                            class="author-avatar rounded-circle me-2"#}
+{#                                                            style="#}
+{#                                                                width: 30px;#}
+{#                                                                height: 30px;#}
+{#                                                            "#}
+{#                                                        />#}
+{#                                                        <div#}
+{#                                                            class="flex-grow-1"#}
+{#                                                        >#}
+{#                                                            <div#}
+{#                                                                class="d-flex justify-content-between align-items-start"#}
+{#                                                            >#}
+{#                                                                <div>#}
+{#                                                                    <h6#}
+{#                                                                        class="mb-0"#}
+{#                                                                    >#}
+{#                                                                        Robert#}
+{#                                                                        Chen#}
+{#                                                                        <small#}
+{#                                                                            class="text-muted"#}
+{#                                                                            >Author</small#}
+{#                                                                        >#}
+{#                                                                    </h6>#}
+{#                                                                    <small#}
+{#                                                                        class="text-muted"#}
+{#                                                                        >June#}
+{#                                                                        11, 2023#}
+{#                                                                        at 11:45#}
+{#                                                                        AM</small#}
+{#                                                                    >#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                            <div#}
+{#                                                                class="reply-content mt-2"#}
+{#                                                            >#}
+{#                                                                <p>#}
+{#                                                                    Thanks#}
+{#                                                                    Sarah!#}
+{#                                                                    That's a#}
+{#                                                                    great point#}
+{#                                                                    about the#}
+{#                                                                    camera bag.#}
+{#                                                                    Do you have#}
+{#                                                                    any specific#}
+{#                                                                    recommendations?#}
+{#                                                                </p>#}
+{#                                                            </div>#}
+{#                                                            <div#}
+{#                                                                class="reply-actions mt-2"#}
+{#                                                            >#}
+{#                                                                <button#}
+{#                                                                    class="btn btn-sm btn-link text-decoration-none p-0 me-3"#}
+{#                                                                >#}
+{#                                                                    <i#}
+{#                                                                        class="far fa-heart me-1"#}
+{#                                                                    ></i>#}
+{#                                                                    2 Likes#}
+{#                                                                </button>#}
+{#                                                                <button#}
+{#                                                                    class="btn btn-sm btn-link text-decoration-none p-0 reply-btn"#}
+{#                                                                >#}
+{#                                                                    <i#}
+{#                                                                        class="fas fa-reply me-1"#}
+{#                                                                    ></i>#}
+{#                                                                    Reply#}
+{#                                                                </button>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {% endfor %}
+                                <!-- Load More Comments Button -->
+                                <div class="text-center mt-4">
+                                    <button
+                                        class="btn btn-outline-secondary"
+                                        id="loadMoreComments"
+                                    >
+                                        Load More Comments
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Post Confirmation Modal -->
+        <div
+            class="modal fade"
+            id="deletePostModal"
+            tabindex="-1"
+            aria-labelledby="deletePostModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deletePostModalLabel">
+                            Delete Post
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Are you sure you want to delete this post? This
+                            action cannot be undone.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            id="confirmDeleteBtn"
+                        >
+                            Delete Post
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
