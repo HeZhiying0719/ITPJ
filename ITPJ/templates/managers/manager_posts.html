@@ -2,6 +2,17 @@
 
 {%load static%}
 
+{% comment %} <li>
+    {%if categories%}
+            <ul>
+            {%for category in categories%}
+                <li><a href="/rango/category/{{category.slug}}/">{{category.name}}</a></li>
+            {%endfor%}
+            </ul>
+            {%else %}
+            <strong>There are no categories present.</strong>
+            {%endif%}
+</li> {% endcomment %}
 
 {% comment %} <html>
     <head>
@@ -145,7 +156,7 @@
                     </div>
                     <div class="mt-5">
                         <a
-                            href="about-us.html"
+                            href="/manager/"
                             class="btn btn-outline-secondary w-100"
                             >Contact us</a
                         >
@@ -783,7 +794,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="/img/Logo2.png" alt="Logo" class="logo" />
+                        <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
                     </div>
                     <div class="col-md-6">
                         <h5>Connect With Us</h5>
@@ -814,6 +825,6 @@
         <!-- Bootstrap JS with Popper -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <!-- Custom JS -->
-        <script src="/js/admin-posts.js"></script>
+        <script src="/static/js/admin-posts.js"></script>
     </body>
 </html>

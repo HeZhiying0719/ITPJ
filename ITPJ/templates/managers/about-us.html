@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About Us - Focus Photography Forum</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- Font Awesome for icons -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <!-- Common CSS -->
+        <link href="/static/css/common.css" rel="stylesheet" />
+        <!-- Page Specific CSS -->
+        <link href="/static/css/about-us.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Header/Navbar -->
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm"
+        >
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'home' %}"
+                    ><img src="/static/img/Logo1.png" alt="Focus Logo"
+                /></a>
+
+                <!-- Create Button and Icons -->
+                <div class="d-flex align-items-center ms-auto">
+                    <a href="create-post.html">
+                        <button class="btn btn-primary me-3">CREATE</button>
+                    </a>
+                    {% comment %} <div class="nav-item me-3 position-relative">
+                        <a href="notification.html" class="nav-link">
+                            <i class="fas fa-bell fa-lg"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            >
+                                3
+                            </span>
+                        </a>
+                    </div> {% endcomment %}
+                    <div class="nav-item dropdown">
+                        <a
+                            href="#"
+                            class="nav-link dropdown-toggle"
+                            id="profileDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <img
+                                src="/static/img/default-user.png"
+                                alt="Profile"
+                                class="avatar"
+                            />
+                        </a>
+                        <ul
+                            class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="profileDropdown"
+                        >
+                            <li>
+                                <a class="dropdown-item" href="myprofile.html"
+                                    >My Profile</a
+                                >
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                            {% comment %} <li>
+                                <a class="dropdown-item" href="#">Log Out</a>
+                            </li> {% endcomment %}
+                            <li>
+                                <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container py-4">
+            <div class="row">
+                <!-- Left Sidebar - Categories -->
+                <div class="col-md-3 category-nav">
+                    <div class="list-group mb-4">
+                        {% comment %} <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="all"
+                            >ALL</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="equipment"
+                            >Equipment</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="photography"
+                            >Photography</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="sharing"
+                            >Sharing</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="events"
+                            >Events</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item list-group-item-action"
+                            data-category="problem-solving"
+                            >Problem Solving</a
+                        > {% endcomment %}
+                    </div>
+                    <div class="mt-5">
+                        <a
+                            href="/manager/"
+                            class="btn btn-outline-secondary w-100"
+                            >About us</a
+                        >
+                    </div>
+                </div>
+
+                <!-- Right Content Area -->
+                <div class="col-md-9">
+                    <div class="row">
+                        <!-- About Us Info Section -->
+                        <div class="col-md-8">
+                            <!-- About Us Section -->
+                            <div class="about-section">
+                                <h2>About Us</h2>
+                                <p>
+                                    Focus is a comprehensive online forum for
+                                    camera enthusiasts, providing users with a
+                                    platform dedicated to cameras and
+                                    photography. We aim to create a space where
+                                    photography enthusiasts can share knowledge,
+                                    discuss equipment and techniques, and
+                                    interact with like-minded individuals.
+                                </p>
+                                <p>
+                                    Our mission is to enable users to
+                                    communicate, learn, and develop their
+                                    photography knowledge and skills through
+                                    meaningful interactions and resource
+                                    sharing.
+                                </p>
+                                <p>
+                                    Founded in 2025 by a group of photography
+                                    enthusiasts, Focus has grown into a vibrant
+                                    community with members from all over the
+                                    world, ranging from beginners to
+                                    professional photographers.
+                                </p>
+                            </div>
+
+                            <!-- Contact Information -->
+                            <div class="about-section">
+                                <h2>Contact Information</h2>
+
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>+44 (0) 141 330 2000</span>
+                                </div>
+
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Uofg@glasgow.ac.uk</span>
+                                </div>
+
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Glasgow, G12 8QQ, Scotland</span>
+                                </div>
+                            </div>
+
+                            <!-- Google Map -->
+                            <div class="about-section">
+                                <h2>Find Us</h2>
+                                <div class="map-container">
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2239.1714881734294!2d-4.28932088425791!3d55.87173998058761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488845cded55af85%3A0x620c705cc7c5f014!2sUniversity%20of%20Glasgow!5e0!3m2!1sen!2suk!4v1646232640577!5m2!1sen!2suk"
+                                        width="100%"
+                                        height="100%"
+                                        style="border: 0"
+                                        allowfullscreen=""
+                                        loading="lazy"
+                                    ></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Team Photo Section -->
+                        <div class="col-md-4">
+                            <div class="about-section">
+                                <h2>Our Team</h2>
+                                <img
+                                    src="/static/img/Uofg.jpg"
+                                    alt="Development Team"
+                                    class="team-image"
+                                />
+                                <p class="text-center fst-italic">
+                                    The Focus Development Team
+                                </p>
+                                <p>
+                                    Our team consists of passionate
+                                    photographers and developers who work
+                                    tirelessly to create the best platform for
+                                    photography enthusiasts around the world.
+                                </p>
+                                <p>
+                                    We believe in the power of community and the
+                                    importance of sharing knowledge and
+                                    experiences in the field of photography.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Connect With Us</h5>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-youtube"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <p class="small mb-0">
+                        © 2025 Focus Photography Forum. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS with Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Common navigation JS -->
+        <script src="/static/js/common-navigation.js"></script>
+        <!-- Custom JS -->
+        <script src="/static/js/script.js"></script>
+    </body>
+</html>
