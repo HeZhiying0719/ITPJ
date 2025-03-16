@@ -32,19 +32,6 @@
 
                 <!-- Create Button and Icons -->
                 <div class="d-flex align-items-center ms-auto">
-                    <a href="create-post.html">
-                        <button class="btn btn-primary me-3">CREATE</button>
-                    </a>
-                    {% comment %} <div class="nav-item me-3 position-relative">
-                        <a href="notification.html" class="nav-link">
-                            <i class="fas fa-bell fa-lg"></i>
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            >
-                                3
-                            </span>
-                        </a>
-                    </div> {% endcomment %}
                     <div class="nav-item dropdown">
                         <a
                             href="#"
@@ -65,14 +52,16 @@
                             aria-labelledby="profileDropdown"
                         >
                             <li>
-                                <a class="dropdown-item" href="myprofile.html"
-                                    >My Profile</a
-                                >
+                                <a class="dropdown-item" href="/manager/posts/"
+                                >Posts Management</a
+                            >
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/manager/users/"
+                                >Users Management</a
+                            >
                             </li>
                             <li><hr class="dropdown-divider" /></li>
-                            {% comment %} <li>
-                                <a class="dropdown-item" href="#">Log Out</a>
-                            </li> {% endcomment %}
                             <li>
                                 <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
                                     {% csrf_token %}
@@ -91,47 +80,23 @@
                 <!-- Left Sidebar - Categories -->
                 <div class="col-md-3 category-nav">
                     <div class="list-group mb-4">
-                        {% comment %} <a
-                            href="#"
-                            class="list-group-item list-group-item-action"
-                            data-category="all"
-                            >ALL</a
-                        >
-                        <a
-                            href="#"
-                            class="list-group-item list-group-item-action"
-                            data-category="equipment"
-                            >Equipment</a
-                        >
-                        <a
-                            href="#"
-                            class="list-group-item list-group-item-action"
-                            data-category="photography"
-                            >Photography</a
-                        >
-                        <a
-                            href="#"
-                            class="list-group-item list-group-item-action"
-                            data-category="sharing"
-                            >Sharing</a
-                        >
-                        <a
-                            href="#"
-                            class="list-group-item list-group-item-action"
-                            data-category="events"
-                            >Events</a
-                        >
-                        <a
-                            href="#"
-                            class="list-group-item list-group-item-action"
-                            data-category="problem-solving"
-                            >Problem Solving</a
-                        > {% endcomment %}
+                        <div class="list-group mb-4">
+                            <a
+                                href="/manager/posts/"
+                                class="list-group-item list-group-item-action"
+                                >Posts Management</a
+                            >
+                            <a
+                                href="/manager/users/"
+                                class="list-group-item list-group-item-action"
+                                >Users Management</a
+                            >
+                        </div>
                     </div>
                     <div class="mt-5">
                         <a
                             href="/manager/"
-                            class="btn btn-outline-secondary w-100"
+                            class="btn btn-outline-secondary w-100 active"
                             >About us</a
                         >
                     </div>
@@ -271,8 +236,7 @@
 
         <!-- Bootstrap JS with Popper -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-        <!-- Common navigation JS -->
-        <script src="/static/js/common-navigation.js"></script>
+        
         <!-- Custom JS -->
         <script src="/static/js/script.js"></script>
     </body>
