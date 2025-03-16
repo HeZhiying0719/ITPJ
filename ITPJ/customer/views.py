@@ -6,8 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, UpdateView, DeleteView
 from docs.conf import author
+from psutil import users
 from tensorboard.plugins.audio.summary import audio
 
 from customer.mixins import LoginRequiredMixin
@@ -23,24 +24,24 @@ class LoginView(BaseUserLoginView):
     success_url = reverse_lazy('customer_dashboard')
     user_type = CustomUser.Type.CUSTOMER
 
-class DashboardView(LoginRequiredMixin, TemplateView):
+class DashboardView(LoginRequiredMixin, DetailView):
     model = UserProfile
     template_name = 'customers/dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_profile'] = UserProfile.objects.all()
+        context['user_profile'] = self.object
         return context
 
-    # def post(self, request, *args, **kwargs):
-    #     form = ProfileForm(request.POST)
-    #     if form.is_valid():
-    #         profile = form.save(commit=False)
-    #         profile.user = self.request.user
-    #         profile.introduction = f
-    #         profile.save()
-    #         return redirect("post_detail", pk=self.object.pk)
-    #     return self.get(request, *args, **kwargs)
+
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
+    model = UserProfile
+    form_class = ProfileForm
+    template_name = "customers/profile_form.html"
+
+    def get_success_url(self):
+        return reverse_lazy("customer_dashboard", kwargs={"pk": self.object.pk})
+
 
 
 class MyPostsView(LoginRequiredMixin, TemplateView):
@@ -86,3 +87,9 @@ class PostDetailView(LoginRequiredMixin, DetailView):
             comment.save()
             return redirect("post_detail", pk=self.object.pk)
         return self.get(request, *args, **kwargs)
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = "customers/post_confirm_delete.html"
+    success_url = reverse_lazy("home")
