@@ -41,10 +41,12 @@
                                         aria-labelledby="postOptionsDropdown"
                                     >
                                         <!-- <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Edit</a></li> -->
+                                       
+                                        {% if user == post.user %}
                                         <li>
                                             <a
                                                 class="dropdown-item text-danger"
-                                                href="#"
+                                                href="{% url 'delete_post' post.pk %}"
                                                 id="deletePostBtn"
                                                 ><i
                                                     class="fas fa-trash me-2"
@@ -52,6 +54,8 @@
                                                 >Delete</a
                                             >
                                         </li>
+                                        {% endif %}
+                             
                                         <li>
                                             <a class="dropdown-item" href="#"
                                                 ><i class="fas fa-flag me-2"></i
@@ -207,16 +211,6 @@
                                                     >
                                                         <li>
                                                             <a
-                                                                class="dropdown-item"
-                                                                href="#"
-                                                                ><i
-                                                                    class="fas fa-reply me-2"
-                                                                ></i
-                                                                >Reply</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
                                                                 class="dropdown-item text-danger"
                                                                 href="#"
                                                                 ><i
@@ -242,14 +236,7 @@
                                                     ></i>
                                                     {{ comment.like_num }} Likes
                                                 </button>
-                                                <button
-                                                    class="btn btn-sm btn-link text-decoration-none p-0 reply-btn"
-                                                >
-                                                    <i
-                                                        class="fas fa-reply me-1"
-                                                    ></i>
-                                                    Reply
-                                                </button>
+                                                
                                             </div>
 
 {#                                            <!-- Reply Form (initially hidden) -->#}

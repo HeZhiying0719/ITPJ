@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block right %}
+    <form method="post">
+    {% csrf_token %}
+    <p>confirm deleting "{{ object }}" ?</p>
+    <button type="submit" class="btn btn-danger">delete</button>
+    <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary">cancel</a>
+    </form>
+
+
+               
+{% endblock %}
