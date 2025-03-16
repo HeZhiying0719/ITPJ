@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 import random
 from django.utils.translation import gettext_lazy as _
-from shapely.predicates import relate
+# from shapely.predicates import relate
 
 
 class Category(models.Model):

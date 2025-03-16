@@ -7,9 +7,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, TemplateView
-from docs.conf import author
 from tensorboard.plugins.audio.summary import audio
-
 from customer.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView
 from users.forms import CustomerRegistrationForm

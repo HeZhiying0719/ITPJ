@@ -11,7 +11,13 @@
     <body>
         <h1>Kiu says...</h1>
         <div>
-            Here is the Posts info page! <br/>
+            
+            {%if post%}
+                <strong>Here is the {{post.title}} page! <br/></strong>
+            {%else%}
+                <strong>Failed to get certain post</strong>
+            {%endif%}
         </div>
+        
     </body>
 </html>

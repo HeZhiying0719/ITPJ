@@ -8,7 +8,6 @@ app_name = 'manager'
 # )
 
 from manager.views import ManagerLoginView, ManagerDashboardView
-from manager.views import ManagerLoginView
 
 
 
@@ -21,4 +20,12 @@ urlpatterns = [
     # path('', views.manage_post, name='manager_dashboard'),
     path('posts/', views.manage_post, name='manage_posts'),
     path('users/', views.manage_user, name='manage_users'),
+    path('', views.manage_aboutus, name='manage_aboutus'),
+    path('categories/', views.manage_categories, name='manage_categories'),
+    path('categories/edit/', views.edit_category, name='edit_category'),
+    path('categories/delete/', views.delete_category, name='delete_category'),
+    path('post-info/<str:auditing_post_id>/', views.post_details, name='post_details'),
+    path('post-delete/<str:auditing_post_id>/', views.delete_post, name='post_delete'),
+    path('post-approve/<str:auditing_post_id>/', views.approve_post, name='post_approve'),
+    
 ]

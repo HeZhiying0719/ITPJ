@@ -48,33 +48,8 @@
                     ><img src="/static/img/Logo1.png" alt="Focus Logo"
                 /></a>
 
-                <!-- Search Box -->
-                {% comment %} <form class="search-form d-flex ms-auto me-3">
-                    <div class="input-group">
-                        <input
-                            class="form-control"
-                            type="search"
-                            placeholder="Search users..."
-                            aria-label="Search"
-                        />
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form> {% endcomment %}
-
                 <!-- Admin Icons -->
                 <div class="d-flex align-items-center">
-                    {% comment %} <div class="nav-item me-3 position-relative">
-                        <a href="notification.html" class="nav-link">
-                            <i class="fas fa-bell fa-lg"></i>
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            >
-                                3
-                            </span>
-                        </a>
-                    </div> {% endcomment %}
                     <div class="nav-item dropdown">
                         <a
                             href="#"
@@ -94,13 +69,6 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="profileDropdown"
                         >
-                            {% comment %} <li>
-                                <a
-                                    class="dropdown-item"
-                                    href="admin-dashboard.html"
-                                    >Dashboard</a
-                                >
-                            </li> {% endcomment %}
                             <li>
                                 <a class="dropdown-item" href="/manager/posts/"
                                     >Posts Management</a
@@ -112,11 +80,6 @@
                                 >
                             </li>
                             <li><hr class="dropdown-divider" /></li>
-                            {% comment %} <li>
-                                <a class="dropdown-item" href="index.html"
-                                    >Logout</a
-                                >
-                            </li> {% endcomment %}
                             <li>
                                 <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
                                     {% csrf_token %}
@@ -148,9 +111,9 @@
                     </div>
                     <div class="mt-5">
                         <a
-                            href="about-us.html"
+                            href="/manager/"
                             class="btn btn-outline-secondary w-100"
-                            >Contact us</a
+                            >About us</a
                         >
                     </div>
                 </div>
@@ -803,7 +766,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="/img/Logo2.png" alt="Logo" class="logo" />
+                        <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
                     </div>
                     <div class="col-md-6">
                         <h5>Connect With Us</h5>
@@ -834,6 +797,6 @@
         <!-- Bootstrap JS with Popper -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <!-- Custom JS -->
-        <script src="/js/admin-users.js"></script>
+        <script src="/static/js/admin-users.js"></script>
     </body>
 </html>

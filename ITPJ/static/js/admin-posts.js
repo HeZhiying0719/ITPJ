@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                 case 'info':
                     // Show post details
-                    window.location.href = `post-details.html?id=${postId}`;
+                    window.location.href = `/manager/post-info/${postId}`;
                     break;
             }
         });
