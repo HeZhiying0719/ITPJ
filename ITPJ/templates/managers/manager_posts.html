@@ -2,6 +2,17 @@
 
 {%load static%}
 
+{% comment %} <li>
+    {%if categories%}
+            <ul>
+            {%for category in categories%}
+                <li><a href="/rango/category/{{category.slug}}/">{{category.name}}</a></li>
+            {%endfor%}
+            </ul>
+            {%else %}
+            <strong>There are no categories present.</strong>
+            {%endif%}
+</li> {% endcomment %}
 
 {% comment %} <html>
     <head>
@@ -49,33 +60,8 @@
                     ><img src="/static/img/Logo1.png" alt="Focus Logo"
                 /></a>
 
-                {% comment %} <!-- Search Box -->
-                <form class="search-form d-flex ms-auto me-3">
-                    <div class="input-group">
-                        <input
-                            class="form-control"
-                            type="search"
-                            placeholder="Search posts..."
-                            aria-label="Search"
-                        />
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form> {% endcomment %}
-
                 <!-- Admin Icons -->
                 <div class="d-flex align-items-center">
-                    {% comment %} <div class="nav-item me-3 position-relative">
-                        <a href="notification.html" class="nav-link">
-                            <i class="fas fa-bell fa-lg"></i>
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            >
-                                3
-                            </span>
-                        </a>
-                    </div> {% endcomment %}
                     <div class="nav-item dropdown">
                         <a
                             href="#"
@@ -96,9 +82,6 @@
                             aria-labelledby="profileDropdown"
                         >
                             <li>
-                                {% comment %} <a class="dropdown-item" href="manager_posts.html"
-                                    >Posts Management</a
-                                > {% endcomment %}
                                 <a class="dropdown-item" href="/manager/posts/"
                                 >Posts Management</a
                             >
@@ -109,11 +92,6 @@
                                 >
                             </li>
                             <li><hr class="dropdown-divider" /></li>
-                            {% comment %} <li>
-                                <a class="dropdown-item" href="/core/homepage.html"
-                                    >Logout</a
-                                >
-                            </li> {% endcomment %}
                             <li>
                                 <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
                                     {% csrf_token %}
@@ -145,9 +123,9 @@
                     </div>
                     <div class="mt-5">
                         <a
-                            href="about-us.html"
+                            href="/manager/"
                             class="btn btn-outline-secondary w-100"
-                            >Contact us</a
+                            >About us</a
                         >
                     </div>
                 </div>
@@ -168,336 +146,119 @@
                                 <i class="fas fa-tags me-1"></i> Manage
                                 Categories
                             </button>
-                            <!-- <a href="create-post.html" class="btn btn-primary">
-                            <i class="fas fa-plus me-1"></i> New Post
-                        </a> -->
                         </div>
                     </div>
 
                     <!-- Posts List -->
                     <div class="posts-list">
-                        <!-- Post Item 1 -->
-                        <div class="card mb-3 post-item">
-                            <div class="row g-0">
-                                <div class="col-md-3">
-                                    <img
-                                        src="/static/img/dog.jpeg"
-                                        class="img-fluid rounded-start post-img w-100 h-100"
-                                        alt="Post image"
-                                    />
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-1">
-                                            How to Choose Your First Mirrorless
-                                            Camera
-                                        </h5>
-                                        <p
-                                            class="card-text text-muted small mb-2"
-                                        >
-                                            By Robert Chen • Equipment • June
-                                            10, 2023
-                                        </p>
-                                        <p class="card-text post-excerpt">
-                                            Looking to upgrade from your
-                                            smartphone photography? Mirrorless
-                                            cameras offer the perfect balance
-                                            between quality and portability. In
-                                            this guide, I'll walk you through
-                                            the essential features to
-                                            consider...
-                                        </p>
-                                        <div class="post-stats small">
-                                            <span class="me-3"
-                                                ><i class="far fa-comment"></i>
-                                                18</span
-                                            >
-                                            <span class="me-3"
-                                                ><i class="far fa-eye"></i>
-                                                342</span
-                                            >
-                                            <span
-                                                ><i class="far fa-heart"></i>
-                                                24</span
-                                            >
+                        {%if posts%}
+                        <ul>
+                            {%for post in posts%}
+                            <div class="card mb-3 post-item">
+                                <div class="row g-0">
+                                    <div class="col-md-3">
+                                        {% if post.photo %}
+                                        <img
+                                            src="{{post.photo.url}}"
+                                            class="img-fluid rounded-start post-img w-100 h-100"
+                                            alt="Post image"
+                                        />
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">
+                                                {{post.tltle}}
+                                            </h5>
+                                            <p class="card-text text-muted small mb-2">
+                                                By {{post.user.username}} • {{post.category1}} • {{post.created_at}}
+                                            </p>
+                                            <p class="card-text post-excerpt">
+                                                {{post.content}}
+                                            </p>
+                                            <div class="post-stats small">
+                                                <span class="me-3"
+                                                    ><i class="far fa-eye"></i>
+                                                    {{post.page_view}}</span
+                                                >
+                                                <span
+                                                    ><i class="far fa-heart"></i>
+                                                    {{post.like_num}}</span
+                                                >
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div
+                                    <div
                                     class="col-md-2 d-flex flex-column align-items-center justify-content-center"
-                                >
+                                    >
+                                    <a
+                                        href="/manager/post-info/{{post.post_id}}/"
+                                        class="btn btn-outline-secondary action-btn"
+                                        data-action="info"
+                                        data-post-id="{{post.post_id}}"
+                                        title="view post detail"
+                                    >
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
                                     <button
                                         class="btn btn-outline-danger mb-2 btn-sm admin-action-btn"
                                         data-action="delete"
-                                        data-post-id="1"
+                                        data-post-id="{{post.post_id}}"
+                                        title="delete post"
                                     >
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <button
-                                        class="btn btn-outline-primary mb-2 btn-sm admin-action-btn"
-                                        data-action="edit"
-                                        data-post-id="1"
-                                    >
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-outline-secondary btn-sm admin-action-btn"
-                                        data-action="info"
-                                        data-post-id="1"
-                                    >
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
+                                </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Post Item 2 -->
-                        <div class="card mb-3 post-item">
-                            <div class="row g-0">
-                                <div class="col-md-3">
-                                    <img
-                                        src="/img/dog.jpeg"
-                                        class="img-fluid rounded-start post-img w-100 h-100"
-                                        alt="Post image"
-                                    />
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-1">
-                                            5 Essential Photography Accessories
-                                            for Beginners
-                                        </h5>
-                                        <p
-                                            class="card-text text-muted small mb-2"
-                                        >
-                                            By Robert Chen • Equipment • June
-                                            12, 2023
-                                        </p>
-                                        <p class="card-text post-excerpt">
-                                            After using my new camera for a
-                                            month, I discovered several
-                                            accessories that greatly improved my
-                                            photography experience. Here are my
-                                            top 5 recommendations for beginners,
-                                            including tripods, lens filters...
-                                        </p>
-                                        <div class="post-stats small">
-                                            <span class="me-3"
-                                                ><i class="far fa-comment"></i>
-                                                12</span
-                                            >
-                                            <span class="me-3"
-                                                ><i class="far fa-eye"></i>
-                                                187</span
-                                            >
-                                            <span
-                                                ><i class="far fa-heart"></i>
-                                                28</span
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="col-md-2 d-flex flex-column align-items-center justify-content-center"
-                                >
-                                    <button
-                                        class="btn btn-outline-danger mb-2 btn-sm admin-action-btn"
-                                        data-action="delete"
-                                        data-post-id="2"
-                                    >
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-outline-primary mb-2 btn-sm admin-action-btn"
-                                        data-action="edit"
-                                        data-post-id="2"
-                                    >
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-outline-secondary btn-sm admin-action-btn"
-                                        data-action="info"
-                                        data-post-id="2"
-                                    >
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Post Item 3 -->
-                        <div class="card mb-3 post-item">
-                            <div class="row g-0">
-                                <div class="col-md-3">
-                                    <img
-                                        src="/img/dog.jpeg"
-                                        class="img-fluid rounded-start post-img w-100 h-100"
-                                        alt="Post image"
-                                    />
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-1">
-                                            Understanding the Exposure Triangle
-                                        </h5>
-                                        <p
-                                            class="card-text text-muted small mb-2"
-                                        >
-                                            By Sarah Williams • Photography •
-                                            June 8, 2023
-                                        </p>
-                                        <p class="card-text post-excerpt">
-                                            Mastering exposure is fundamental to
-                                            photography. The relationship
-                                            between aperture, shutter speed, and
-                                            ISO forms what we call the "exposure
-                                            triangle." This post breaks down
-                                            these concepts in simple terms...
-                                        </p>
-                                        <div class="post-stats small">
-                                            <span class="me-3"
-                                                ><i class="far fa-comment"></i>
-                                                42</span
-                                            >
-                                            <span class="me-3"
-                                                ><i class="far fa-eye"></i>
-                                                518</span
-                                            >
-                                            <span
-                                                ><i class="far fa-heart"></i>
-                                                76</span
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="col-md-2 d-flex flex-column align-items-center justify-content-center"
-                                >
-                                    <button
-                                        class="btn btn-outline-danger mb-2 btn-sm admin-action-btn"
-                                        data-action="delete"
-                                        data-post-id="3"
-                                    >
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-outline-primary mb-2 btn-sm admin-action-btn"
-                                        data-action="edit"
-                                        data-post-id="3"
-                                    >
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-outline-secondary btn-sm admin-action-btn"
-                                        data-action="info"
-                                        data-post-id="3"
-                                    >
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Post Item 4 -->
-                        <div class="card mb-3 post-item">
-                            <div class="row g-0">
-                                <div class="col-md-3">
-                                    <img
-                                        src="/img/dog.jpeg"
-                                        class="img-fluid rounded-start post-img w-100 h-100"
-                                        alt="Post image"
-                                    />
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-1">
-                                            My Weekend Photography Adventure in
-                                            the Mountains
-                                        </h5>
-                                        <p
-                                            class="card-text text-muted small mb-2"
-                                        >
-                                            By Amanda Torres • Sharing • June
-                                            15, 2023
-                                        </p>
-                                        <p class="card-text post-excerpt">
-                                            This past weekend, I took my camera
-                                            on a hiking trip to capture the
-                                            breathtaking mountain landscapes.
-                                            Here's a collection of my favorite
-                                            shots, along with the camera
-                                            settings I used and some
-                                            challenges...
-                                        </p>
-                                        <div class="post-stats small">
-                                            <span class="me-3"
-                                                ><i class="far fa-comment"></i>
-                                                27</span
-                                            >
-                                            <span class="me-3"
-                                                ><i class="far fa-eye"></i>
-                                                312</span
-                                            >
-                                            <span
-                                                ><i class="far fa-heart"></i>
-                                                56</span
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="col-md-2 d-flex flex-column align-items-center justify-content-center"
-                                >
-                                    <button
-                                        class="btn btn-outline-danger mb-2 btn-sm admin-action-btn"
-                                        data-action="delete"
-                                        data-post-id="4"
-                                    >
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-outline-primary mb-2 btn-sm admin-action-btn"
-                                        data-action="edit"
-                                        data-post-id="4"
-                                    >
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-outline-secondary btn-sm admin-action-btn"
-                                        data-action="info"
-                                        data-post-id="4"
-                                    >
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            {%endfor%}   
+                        </ul>
+                        {%else%}
+                        <strong>
+                            Dear Manager. No Posts Need to be Audited Currently.
+                        </strong>
+                        {%endif%}
                     </div>
 
                     <!-- Pagination -->
                     <nav aria-label="Page navigation" class="mt-4">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
+                            {% if posts.has_previous %}
+                            <li class="page-item">
                                 <a
                                     class="page-link"
-                                    href="#"
+                                    href="?page={{ posts.previous_page_number }}"
                                     tabindex="-1"
-                                    aria-disabled="true"
                                     >Previous</a
                                 >
                             </li>
+                            {%else%}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            {%endif%}
+                            
+                            {% for num in posts.paginator.page_range %}
+                            {% if posts.number == num %}
                             <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
+                                <a class="page-link" href="#">{{ num }}</a>
                             </li>
+                            {% else %}
                             <li class="page-item">
-                                <a class="page-link" href="#">2</a>
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
                             </li>
+                            {% endif %}
+                            {% endfor %}
+                
+                            {% if posts.has_next %}
                             <li class="page-item">
-                                <a class="page-link" href="#">3</a>
+                                <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
                             </li>
-                            <li class="page-item">
+                            {% else %}
+                            <li class="page-item disabled">
                                 <a class="page-link" href="#">Next</a>
                             </li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
@@ -530,106 +291,40 @@
                             <div class="col-md-6">
                                 <h6>Current Categories</h6>
                                 <div class="list-group" id="categoriesList">
-                                    <div
-                                        class="list-group-item d-flex justify-content-between align-items-center"
-                                    >
-                                        <span>Equipment</span>
-                                        <div>
-                                            <button
-                                                class="btn btn-sm btn-outline-primary me-1 edit-category-btn"
-                                                data-category="Equipment"
-                                            >
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button
-                                                class="btn btn-sm btn-outline-danger delete-category-btn"
-                                                data-category="Equipment"
-                                            >
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="list-group-item d-flex justify-content-between align-items-center"
-                                    >
-                                        <span>Photography</span>
-                                        <div>
-                                            <button
-                                                class="btn btn-sm btn-outline-primary me-1 edit-category-btn"
-                                                data-category="Photography"
-                                            >
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button
-                                                class="btn btn-sm btn-outline-danger delete-category-btn"
-                                                data-category="Photography"
-                                            >
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="list-group-item d-flex justify-content-between align-items-center"
-                                    >
-                                        <span>Sharing</span>
-                                        <div>
-                                            <button
-                                                class="btn btn-sm btn-outline-primary me-1 edit-category-btn"
-                                                data-category="Sharing"
-                                            >
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button
-                                                class="btn btn-sm btn-outline-danger delete-category-btn"
-                                                data-category="Sharing"
-                                            >
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="list-group-item d-flex justify-content-between align-items-center"
-                                    >
-                                        <span>Events</span>
-                                        <div>
-                                            <button
-                                                class="btn btn-sm btn-outline-primary me-1 edit-category-btn"
-                                                data-category="Events"
-                                            >
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button
-                                                class="btn btn-sm btn-outline-danger delete-category-btn"
-                                                data-category="Events"
-                                            >
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="list-group-item d-flex justify-content-between align-items-center"
-                                    >
-                                        <span>Problem Solving</span>
-                                        <div>
-                                            <button
-                                                class="btn btn-sm btn-outline-primary me-1 edit-category-btn"
-                                                data-category="Problem Solving"
-                                            >
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button
-                                                class="btn btn-sm btn-outline-danger delete-category-btn"
-                                                data-category="Problem Solving"
-                                            >
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                    {%if categories%}
+                                    <ul>
+                                        {%for category in categories%}
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center"
+                                        >
+                                            <span>{{category.name}}</span>
+                                            {% comment %} need further update {% endcomment %}
+                                            <div>
+                                                <button
+                                                    class="btn btn-sm btn-outline-primary me-1 edit-category-btn"
+                                                    data-category="{{category.name}}"
+                                                >
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="btn btn-sm btn-outline-danger delete-category-btn"
+                                                    data-category="{{category.name}}"
+                                                >
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        {%endfor%}
+                                    </ul>
+                                    {%else%}
+                                    <strong>Dear Manager, No Categories Founded.</strong>
+                                    {%endif%}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h6>Add New Category</h6>
-                                <form id="addCategoryForm">
+                                <form method='Post' action="{% url 'manager:manage_categories' %}">
+                                    {% csrf_token %}
                                     <div class="mb-3">
                                         <label
                                             for="categoryName"
@@ -640,22 +335,11 @@
                                             type="text"
                                             class="form-control"
                                             id="categoryName"
+                                            name="categoryName"
                                             placeholder="Enter category name"
                                         />
                                     </div>
-                                    <div class="mb-3">
-                                        <label
-                                            for="categoryDescription"
-                                            class="form-label"
-                                            >Description (optional)</label
-                                        >
-                                        <textarea
-                                            class="form-control"
-                                            id="categoryDescription"
-                                            rows="3"
-                                            placeholder="Enter category description"
-                                        ></textarea>
-                                    </div>
+                                    
                                     <button
                                         type="submit"
                                         class="btn btn-primary"
@@ -684,18 +368,7 @@
                                                 id="editCategoryName"
                                             />
                                         </div>
-                                        <div class="mb-3">
-                                            <label
-                                                for="editCategoryDescription"
-                                                class="form-label"
-                                                >Description</label
-                                            >
-                                            <textarea
-                                                class="form-control"
-                                                id="editCategoryDescription"
-                                                rows="3"
-                                            ></textarea>
-                                        </div>
+                                        
                                         <div
                                             class="d-flex justify-content-between"
                                         >
@@ -783,7 +456,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="/img/Logo2.png" alt="Logo" class="logo" />
+                        <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
                     </div>
                     <div class="col-md-6">
                         <h5>Connect With Us</h5>
@@ -814,6 +487,6 @@
         <!-- Bootstrap JS with Popper -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <!-- Custom JS -->
-        <script src="/js/admin-posts.js"></script>
+        <script src="/static/js/admin-posts.js"></script>
     </body>
 </html>

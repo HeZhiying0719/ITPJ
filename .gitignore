@@ -9,3 +9,7 @@
 #pycache
 __pycache__/
 *.pyc
+
+
+#settings.py
+settings.py
