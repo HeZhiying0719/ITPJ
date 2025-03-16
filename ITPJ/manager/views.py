@@ -16,6 +16,9 @@ from django.views.generic import CreateView
 
 from core.models import Category, Post, PostStatus
 
+#16/3
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 class ManagerLoginView(BaseUserLoginView):
     success_url = reverse_lazy('manager:manager_dashboard')
@@ -39,7 +42,19 @@ def manage_post(request):
     try:
         #获取所有审核状态下的帖子
         post_list = Post.objects.filter(post_status__status = PostStatus.Status.AUDITING)
-        context_dict['posts'] = post_list
+        #目前方便测试翻页功能设定为一页有2个帖子
+        paginator = Paginator(post_list, 2)
+        page = request.GET.get('page')
+        #16/3
+        # 
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        context_dict['posts'] = posts
+        context_dict['paginator'] = paginator
     
     except Post.DoesNotExist:
         context_dict['posts'] = None
