@@ -1,7 +1,6 @@
 from logging import Manager
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.shortcuts import render
 from django.http import HttpResponse
 
 
@@ -16,6 +15,7 @@ from django.db.models import Max
 from django.views.generic import CreateView
 
 from core.models import Category, Post, PostStatus
+from users.models import CustomUser
 
 #16/3
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -105,7 +105,22 @@ def manage_user(request):
     context_dict = {}
     #15/3
     #users i.e. customers
-    
+    #16/3
+    try:
+        user_list = CustomUser.objects.all()
+        paginator = Paginator(user_list, 3)
+        page = request.GET.get('page')
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        context_dict['users'] = users
+        context_dict['paginator'] = paginator
+    except CustomUser.DoesNotExist:
+        context_dict['users'] = None
+        
     return render(request, 'managers/manager_users.html', context=context_dict)
 
 def manage_aboutus(request):
@@ -123,8 +138,11 @@ def post_details(request, auditing_post_id):
     
     return render(request, 'managers/post_info.html', context=context_dict)
     
+    
+    #Undone
 def delete_post(request, auditing_post_id):
     return redirect('manager:manage_posts')
 
+    #Undone
 def approve_post(request, auditing_post_id):
     return redirect('manager:manage_posts')
