@@ -57,7 +57,7 @@
                                         {% endif %}
                              
                                         <li>
-                                            <a class="dropdown-item" href="#"
+                                            <a class="dropdown-item" href="{% url 'report_post' post.pk %}"
                                                 ><i class="fas fa-flag me-2"></i
                                                 >Report</a
                                             >
@@ -195,32 +195,7 @@
                                                         >{{ comment.created_at }}</small
                                                     >
                                                 </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                        class="btn btn-sm btn-light"
-                                                        type="button"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                    >
-                                                        <i
-                                                            class="fas fa-ellipsis-v"
-                                                        ></i>
-                                                    </button>
-                                                    <ul
-                                                        class="dropdown-menu dropdown-menu-end"
-                                                    >
-                                                        <li>
-                                                            <a
-                                                                class="dropdown-item text-danger"
-                                                                href="#"
-                                                                ><i
-                                                                    class="fas fa-flag me-2"
-                                                                ></i
-                                                                >Report</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                
                                             </div>
                                             <div class="comment-content mt-2">
                                                 <p>
