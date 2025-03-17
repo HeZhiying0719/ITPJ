@@ -200,44 +200,101 @@
                     <div class="list-group mb-4" id="categoriesList">
                         <a
                             href="{% url 'home' %}"
+                            {% if request.resolver_match.url_name == "home" %}
                             class="list-group-item list-group-item-action active"
+                            {% else %}
+                            class="list-group-item list-group-item-action"
+                            {% endif %}
+                            
                             data-category="all"
                             >ALL</a
                         >
                         <a
                             href="{% url 'equipment' %}"
+                            {% if request.resolver_match.url_name == "equipment" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
                             class="list-group-item list-group-item-action"
-                            data-category="equipment"
+                            {% endif %}
                             >Equipment</a
                         >
                         <a
-                            href="#"
+                            href="{% url 'landscape' %}"
+                            {% if request.resolver_match.url_name == "landscape" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
                             class="list-group-item list-group-item-action"
-                            data-category="photography"
-                            >Photography</a
+                            {% endif %}
+                            >Landscape</a
                         >
                         <a
-                            href="#"
+                            href="{% url 'nature' %}"
+                            {% if request.resolver_match.url_name == "nature" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
                             class="list-group-item list-group-item-action"
-                            data-category="sharing"
-                            >Sharing</a
+                            {% endif %}
+                            >Nature</a
                         >
                         <a
-                            href="#"
+                            href="{% url 'street' %}"
+                            {% if request.resolver_match.url_name == "street" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
                             class="list-group-item list-group-item-action"
-                            data-category="events"
-                            >Events</a
+                            {% endif %}
+                            >Street</a
                         >
                         <a
-                            href="#"
+                            href="{% url 'travel' %}"
+                            {% if request.resolver_match.url_name == "travel" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
                             class="list-group-item list-group-item-action"
-                            data-category="problem-solving"
-                            >Problem Solving</a
+                            {% endif %}
+                            >Travel</a
                         >
+                        <a
+                            href="{% url 'lifestyle' %}"
+                            {% if request.resolver_match.url_name == "lifestyle" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
+                            class="list-group-item list-group-item-action"
+                            {% endif %}
+                            >Lifestyle</a
+                        >
+                        <a
+                            href="{% url 'creative' %}"
+                            {% if request.resolver_match.url_name == "creative" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
+                            class="list-group-item list-group-item-action"
+                            {% endif %}
+                            >Creative</a
+                        >
+                        <a
+                            href="{% url 'object' %}"
+                            {% if request.resolver_match.url_name == "object" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
+                            class="list-group-item list-group-item-action"
+                            {% endif %}
+                            >Object</a
+                        >
+                        <a
+                            href="{% url 'portraiture' %}"
+                            {% if request.resolver_match.url_name == "portraiture" %}
+                            class="list-group-item list-group-item-action active"
+                            {% else %}
+                            class="list-group-item list-group-item-action"
+                            {% endif %}
+                            >Portraiture</a
+                        >
+                        
                     </div>
                     <div class="mt-5">
                         <a
-                            href="/pages/about-us.html"
+                            href="{% url 'aboutus' %}"
                             class="btn btn-outline-secondary w-100"
                             >About us</a
                         >
@@ -260,8 +317,8 @@
                     <div class="col-md-6">
                         <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
                     </div>
-                    <div class="col-md-6">
-                        <h5>Connect With Us</h5>
+                    <a class="col-md-6" href="{% url 'aboutus' %}">
+                        <h5>Connect Us</h5>
                         <div class="d-flex justify-content-center">
                             <a href="#" class="text-white mx-2"
                                 ><i class="fab fa-facebook-f"></i
@@ -276,7 +333,7 @@
                                 ><i class="fab fa-youtube"></i
                             ></a>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="mt-2">
                     <p class="small mb-0">
