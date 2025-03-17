@@ -44,7 +44,7 @@ def manage_post(request):
         #获取所有审核状态下的帖子
         post_list = Post.objects.filter(post_status__status = PostStatus.Status.AUDITING)
         #目前方便测试翻页功能设定为一页有2个帖子,之后更换为4个为最好
-        paginator = Paginator(post_list, 2)
+        paginator = Paginator(post_list, 3)
         page = request.GET.get('page')
         #16/3
         # 
@@ -113,6 +113,7 @@ def manage_user(request):
     #16/3
     try:
         user_list = CustomUser.objects.all()
+        #4 or 5 
         paginator = Paginator(user_list, 3)
         page = request.GET.get('page')
         try:
