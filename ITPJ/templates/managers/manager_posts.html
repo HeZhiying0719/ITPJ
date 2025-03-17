@@ -163,6 +163,12 @@
                                             class="img-fluid rounded-start post-img w-100 h-100"
                                             alt="Post image"
                                         />
+                                        {% else %}
+                                        <img
+                                            src="\static\img\dog.jpeg"
+                                            class="img-fluid rounded-start post-img w-100 h-100"
+                                            alt="Post image"
+                                        />
                                         {% endif %}
                                     </div>
                                     <div class="col-md-7">
@@ -193,21 +199,29 @@
                                     >
                                     <a
                                         href="/manager/post-info/{{post.post_id}}/"
-                                        class="btn btn-outline-secondary action-btn"
-                                        data-action="info"
-                                        data-post-id="{{post.post_id}}"
+                                        class="btn btn-outline-secondary mb-2 btn-sm action-btn"
                                         title="view post detail"
                                     >
                                         <i class="fas fa-info-circle"></i>
                                     </a>
-                                    <button
-                                        class="btn btn-outline-danger mb-2 btn-sm admin-action-btn"
-                                        data-action="delete"
-                                        data-post-id="{{post.post_id}}"
+                                    <a
+                                        href="/manager/post-approve/{{post.post_id}}/"
+                                        class="btn btn-outline-success mb-2 btn-sm action-btn"
+                                        title="Approve Post"
+                                        onclick="reviewPost()"
+                                    >
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                    <a
+                                        href="/manager/post-delete/{{post.post_id}}/"
+                                        class="btn btn-outline-danger mb-2 btn-sm action-btn"
+                                        {% comment %} data-action="delete"
+                                        data-post-id="{{post.post_id}}" {% endcomment %}
                                         title="delete post"
                                     >
                                         <i class="fas fa-trash"></i>
-                                    </button>
+                                    </a>
+
                                 </div>
                                 </div>
                             </div>
