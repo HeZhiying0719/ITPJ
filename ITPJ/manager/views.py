@@ -43,8 +43,8 @@ def manage_post(request):
     try:
         #获取所有审核状态下的帖子
         post_list = Post.objects.filter(post_status__status = PostStatus.Status.AUDITING)
-        #目前方便测试翻页功能设定为一页有2个帖子
-        paginator = Paginator(post_list, 2)
+        #目前方便测试翻页功能设定为一页有4个帖子
+        paginator = Paginator(post_list, 4)
         page = request.GET.get('page')
         #16/3
         # 
