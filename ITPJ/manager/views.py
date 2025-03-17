@@ -10,7 +10,7 @@ from users.forms import CustomerRegistrationForm
 from users.models import CustomUser
 from django.views.generic import CreateView, TemplateView
 
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Max
 from django.views.generic import CreateView
 
@@ -43,8 +43,8 @@ def manage_post(request):
     try:
         #获取所有审核状态下的帖子
         post_list = Post.objects.filter(post_status__status = PostStatus.Status.AUDITING)
-        #目前方便测试翻页功能设定为一页有4个帖子
-        paginator = Paginator(post_list, 4)
+        #目前方便测试翻页功能设定为一页有2个帖子,之后更换为4个为最好
+        paginator = Paginator(post_list, 2)
         page = request.GET.get('page')
         #16/3
         # 
@@ -91,15 +91,20 @@ def edit_category(request):
     return redirect('manager:manage_categories')
 
 
-def delete_category(request):
+def delete_category(request, auditing_category_name):
     # 处理“删除分类”的 GET 请求
-    cat_id = request.GET.get('cat_id')
-    try:
-        cat = Category.objects.get(pk=cat_id)
-        cat.delete()
-    except Category.DoesNotExist:
-        pass
-    return redirect('manager:manage_categories')
+    # cat_id = request.GET.get('cat_id')
+    # try:
+    #     cat = Category.objects.get(pk=cat_id)
+    #     cat.delete()
+    # except Category.DoesNotExist:
+    #     pass
+    print(f"Trying to delete category with name : {auditing_category_name}")
+    
+    category = get_object_or_404(Category, name = str(auditing_category_name))
+    category.delete()
+    
+    return redirect('manager:manage_posts')
 
 def manage_user(request):
     context_dict = {}
@@ -139,10 +144,21 @@ def post_details(request, auditing_post_id):
     return render(request, 'managers/post_info.html', context=context_dict)
     
     
-    #Undone
+    #17/3
 def delete_post(request, auditing_post_id):
+    print(f"Trying to delete post with ID : {auditing_post_id}")
+    
+    post = get_object_or_404(Post, post_id = str(auditing_post_id))
+    post.delete()
+    
     return redirect('manager:manage_posts')
 
-    #Undone
+    #17/3
 def approve_post(request, auditing_post_id):
+    print(f"Trying to approve post with ID : {auditing_post_id}")
+    
+    post = get_object_or_404(Post, post_id = str(auditing_post_id))
+    post.post_status = PostStatus.objects.get(status=PostStatus.Status.OKEY)
+    post.save()
+    
     return redirect('manager:manage_posts')

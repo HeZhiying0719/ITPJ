@@ -138,276 +138,109 @@
 
                     <!-- Users List -->
                     <div class="users-list">
-                        <!-- User Item 1 - Admin -->
-                        <div class="card mb-3 user-item">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-md-1 text-center">
-                                        <img
-                                            src="/img/default-user.png"
+                        {%if users%}
+                        <ul>
+                            {%for user in users%}
+                            <div class="card mb-3 user-item">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        {% if user.user_profile.avatar %}
+                                        <div class="col-md-1 text-center">
+                                            <img
+                                            src="{{user.user_profile.avatar.url}}"
                                             class="user-avatar rounded-circle"
                                             alt="User avatar"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="card-title mb-0">
-                                            Robert Chen
-                                        </h5>
-                                        <p
-                                            class="card-text text-muted small mb-0"
-                                        >
-                                            robert.chen@example.com
-                                        </p>
-                                        <span
-                                            class="badge bg-primary role-badge"
-                                            >Administrator</span
-                                        >
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div
-                                            class="user-stats d-flex justify-content-around text-center"
-                                        >
-                                            <div class="stat-item">
-                                                <div class="stat-value">24</div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Posts
-                                                </div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">
-                                                    128
-                                                </div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Comments
-                                                </div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">
-                                                    Apr 2022
-                                                </div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Joined
+                                            />
+                                        </div>
+                                        {% else %}
+                                        <div class="col-md-1 text-center">
+                                            <img
+                                            src="\static\img\default-user.png"
+                                            class="user-avatar rounded-circle"
+                                            alt="User avatar"
+                                            />
+                                        </div>
+                                        {% endif %}
+                                        <div class="col-md-4">
+                                            <h5 class="card-title mb-0">
+                                                {{user.username}}
+                                            </h5>
+                                            <p
+                                                class="card-text text-muted small mb-0"
+                                            >
+                                                {{user.email}}
+                                            </p>
+                                            {% if user.type == 'manager' %}
+                                            <span
+                                                class="badge bg-primary role-badge"
+                                                >{{user.type}}</span
+                                            >
+                                            {% else %}
+                                            <span
+                                                class="badge bg-secondary role-badge"
+                                                >{{user.type}}</span
+                                            >
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div
+                                                class="user-stats d-flex justify-content-around text-center"
+                                            >
+                                                <div class="stat-item">
+                                                    <div class="stat-value">
+                                                        {{user.date_joined}}
+                                                    </div>
+                                                    <div
+                                                        class="stat-label small text-muted"
+                                                    >
+                                                        Joined
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div
-                                        class="col-md-2 d-flex justify-content-end"
-                                    >
-                                        <button
-                                            class="btn btn-outline-secondary me-2 btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Edit User"
-                                            data-user-id="1"
-                                            data-action="edit"
-                                        >
-                                            <i class="fas fa-user-edit"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-outline-danger btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Delete User"
-                                            data-user-id="1"
-                                            data-action="delete"
-                                        >
-                                            <i class="fas fa-user-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                        <div
+                                            class="col-md-2 d-flex justify-content-end"
+                                            >
+                                            {% if user.type != 'manager' %}
+                                            <a
 
-                        <!-- User Item 2 - Regular User -->
-                        <div class="card mb-3 user-item">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-md-1 text-center">
-                                        <img
-                                            src="/img/default-user.png"
-                                            class="user-avatar rounded-circle"
-                                            alt="User avatar"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="card-title mb-0">
-                                            Sarah Williams
-                                        </h5>
-                                        <p
-                                            class="card-text text-muted small mb-0"
-                                        >
-                                            sarah.williams@example.com
-                                        </p>
-                                        <span
-                                            class="badge bg-secondary role-badge"
-                                            >Regular User</span
-                                        >
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div
-                                            class="user-stats d-flex justify-content-around text-center"
-                                        >
-                                            <div class="stat-item">
-                                                <div class="stat-value">12</div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Posts
-                                                </div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">87</div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Comments
-                                                </div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">
-                                                    Jun 2022
-                                                </div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Joined
-                                                </div>
-                                            </div>
+                                                class="btn btn-outline-primary me-2 btn-sm action-btn"
+                                                data-bs-toggle="tooltip"
+                                                title="Make Admin"
+                                                data-user-id="2"
+                                                data-action="make-admin"
+                                            >
+                                                <i class="fas fa-user-shield"></i>
+                                            </a>
+                                            {% endif %}
+                                            {% comment %} <button
+                                                class="btn btn-outline-secondary me-2 btn-sm action-btn"
+                                                data-bs-toggle="tooltip"
+                                                title="Edit User"
+                                                data-user-id="2"
+                                                data-action="edit"
+                                            >
+                                                <i class="fas fa-user-edit"></i>
+                                            </button> {% endcomment %}
+                                            <button
+                                                class="btn btn-outline-danger btn-sm action-btn"
+                                                data-bs-toggle="tooltip"
+                                                title="Delete User"
+                                                data-user-id="2"
+                                                data-action="delete"
+                                            >
+                                                <i class="fas fa-user-times"></i>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div
-                                        class="col-md-2 d-flex justify-content-end"
-                                    >
-                                        <button
-                                            class="btn btn-outline-primary me-2 btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Make Admin"
-                                            data-user-id="2"
-                                            data-action="make-admin"
-                                        >
-                                            <i class="fas fa-user-shield"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-outline-secondary me-2 btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Edit User"
-                                            data-user-id="2"
-                                            data-action="edit"
-                                        >
-                                            <i class="fas fa-user-edit"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-outline-danger btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Delete User"
-                                            data-user-id="2"
-                                            data-action="delete"
-                                        >
-                                            <i class="fas fa-user-times"></i>
-                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- User Item 3 - Regular User -->
-                        <div class="card mb-3 user-item">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-md-1 text-center">
-                                        <img
-                                            src="/img/default-user.png"
-                                            class="user-avatar rounded-circle"
-                                            alt="User avatar"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="card-title mb-0">
-                                            Michael Chen
-                                        </h5>
-                                        <p
-                                            class="card-text text-muted small mb-0"
-                                        >
-                                            michael.chen@example.com
-                                        </p>
-                                        <span
-                                            class="badge bg-secondary role-badge"
-                                            >Regular User</span
-                                        >
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div
-                                            class="user-stats d-flex justify-content-around text-center"
-                                        >
-                                            <div class="stat-item">
-                                                <div class="stat-value">8</div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Posts
-                                                </div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">46</div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Comments
-                                                </div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">
-                                                    Sep 2022
-                                                </div>
-                                                <div
-                                                    class="stat-label small text-muted"
-                                                >
-                                                    Joined
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="col-md-2 d-flex justify-content-end"
-                                    >
-                                        <button
-                                            class="btn btn-outline-primary me-2 btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Make Admin"
-                                            data-user-id="3"
-                                            data-action="make-admin"
-                                        >
-                                            <i class="fas fa-user-shield"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-outline-secondary me-2 btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Edit User"
-                                            data-user-id="3"
-                                            data-action="edit"
-                                        >
-                                            <i class="fas fa-user-edit"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-outline-danger btn-sm action-btn"
-                                            data-bs-toggle="tooltip"
-                                            title="Delete User"
-                                            data-user-id="3"
-                                            data-action="delete"
-                                        >
-                                            <i class="fas fa-user-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <strong>Dear Manager. No users in the list.</strong>
+                        {% endif %}
                     </div>
-
                     <!-- Pagination -->
                     <nav aria-label="Page navigation" class="mt-4">
                         <ul class="pagination justify-content-center">
