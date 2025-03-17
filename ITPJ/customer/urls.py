@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from customer.views import (
     LoginView, DashboardView, PostingView, MyPostsView, PostDetailView, UpdateProfileView, PostDeleteView,
-    PostReportView
+    PostReportView,
 )
 
 urlpatterns = [
@@ -17,5 +17,6 @@ urlpatterns = [
     path('delete/<str:pk>/', PostDeleteView.as_view(), name='delete_post'),
 
     path('report/<str:pk>/', PostReportView.as_view(), name='report_post'),
+
 
 ]

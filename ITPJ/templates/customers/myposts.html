@@ -6,72 +6,31 @@
 {#{% endblock %}#}
 
 {% block right %}
-
     <div class="col-md-9">
-                    <!-- Featured Posts (3 boxes at top) -->
-    <div class="card shadow-sm">
-        <div class="card-body p-4">
+    <!-- Featured Posts (3 boxes at top) -->
+    <div class="row mb-4">
+        {% for post in posts %}
+        <div class="col-md-4">
+            <a href="{% url 'post_detail' post.post_id %}" class="text-decoration-none">
+                <div class="card h-100" style="min-height: 300px;">
+                    {% if post.photo %}
+                    <img src="{{ post.photo.url }}" alt="Post Image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            {{ post.title }}
+                        </h6>
+                        <div class="d-flex justify-content-between align-items-center mt-2 text-muted" style="font-size: 0.9rem; gap: 10px;">
+                            <small class="fw-semibold"><i class="bi bi-person-circle"></i> {{ post.user.username }}</small>
+                            <small class="fw-light"><i class="bi bi-clock"></i> {{ post.created_at|date:"Y-m-d H:i" }}</small>
+                            <small class="fw-light"><i class="bi bi-arrow-clockwise"></i> {{ post.updated_at|date:"Y-m-d H:i" }}</small>
+                        </div>
 
-        <body>
-        <h1>My Posts</h1>
-        <ul>
-            {% for post in posts %}
-                <div class="col-md-4">
-                <a href="{% url 'post_detail' post.post_id %}">
-                            <div class="card h-100">
-                            
-                                {% if post.photo %}
-                                <img src="{{ post.photo.url }}" alt="Post Image">
-                                {% endif %}
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        {{ post.title }}
-                                    </h6>
-                                    <div
-                                        class="d-flex justify-content-between align-items-center mt-2"
-                                    >
-                                        <small class="text-muted"
-                                            >By {{ post.user.username }}</small
-                                        >
-                                        <small>post time: {{ post.created_at }}</small>
-                                        <small>last updated at: {{ post.updated_at }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                </a>
+                    </div>
                 </div>
-                        
-            {% endfor %}
-        </ul>
-    </body>
+            </a>
+        </div>
+        {% endfor %}
     </div>
-    </div>
-    </div>
-
-
-    
+</div> 
 {% endblock %}
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".like-btn").forEach(button => {
-        button.addEventListener("click", function() {
-            let postId = this.dataset.postId;  // 获取帖子 ID
-            let likeCountSpan = document.getElementById(`like-count-${postId}`);
-
-            fetch(`/post/${postId}/like/`, { 
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}",
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                likeCountSpan.innerText = data.like_num;  // 更新点赞数
-            })
-            .catch(error => console.error("Error:", error));
-        });
-    });
-});
-</script>
