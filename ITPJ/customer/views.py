@@ -69,11 +69,19 @@ class PostingView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'core/postdetail.html'  # 详情页的模板
     context_object_name = 'post'
+
+    def get_object(self, queryset=None):
+        post = super().get_object(queryset)
+        # session_key = f"viewed_post_{post.pk}"
+        # if not self.request.session.get(session_key, False):
+        post.page_view += 1
+        post.save(update_fields=["page_view"])
+            # self.request.session[session_key] = True
+        return post
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -91,7 +99,6 @@ class PostDetailView(LoginRequiredMixin, DetailView):
             comment.save()
             return redirect("post_detail", pk=self.object.pk)
         return self.get(request, *args, **kwargs)
-
 
 
 class PostDeleteView(DeleteView):

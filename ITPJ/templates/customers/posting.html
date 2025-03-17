@@ -23,7 +23,59 @@
                                     </div>
                                     
                                     </div>
-{#                                {% elif field.label == "Category1"%}#}
+                                {% elif field.label == "Category"%}
+                                    <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}"
+                                           class="form-label fw-bold"
+                                           style="color: #333333">{{ field.label }}</label>
+                                    <select
+                                        class="form-select"
+                                        id="{{ field.id_for_label }}"
+                                            name="{{ field.name }}"
+                                        aria-label="Select a category"
+                                        required
+                                    >
+                                        <option selected disabled value="">
+                                            Select a category
+                                        </option>
+                                        <option value="1">
+                                            equipment
+                                        </option>
+                                        <option value="2">
+                                            landscape
+                                        </option>
+                                        <option value="3">nature</option>
+                                        <option value="4">street</option>
+                                        <option value="5">
+                                            travel
+                                        </option>
+                                        <option value="6">
+                                            lifestyle
+                                        </option>
+                                        <option value="7">
+                                            creative
+                                        </option>
+                                        <option value="8">
+                                            object
+                                        </option>
+                                        <option value="9">
+                                            portraiture
+                                        </option>
+                                    </select>
+                                </div>
+                                    
+                                {% elif field.label == "Content"%}
+                                    <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}"
+                                           class="form-label fw-bold"
+                                           style="color: #333333">{{ field.label }}</label>
+                                    <textarea
+                                            class="form-control"
+                                            id="{{ field.id_for_label }}"
+                                            name="{{ field.name }}"
+                                            rows="10"
+                                        ></textarea>
+                                    </div>
                                 
                                 {% else %}
                                     <div class="mb-3">

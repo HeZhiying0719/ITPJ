@@ -22,7 +22,7 @@
                                         <h6 class="mb-0">   {{ post.user.username }}</h6>
                                         <small class="text-muted"
                                             >   Posted on {{ post.updated_at }} •
-                                            {{ post.category1 }} • {{ post.category2 }} • {{ post.category3 }} • {{ post.category4 }}</small
+                                            {{ post.category }}</small
                                         >
                                     </div>
                                 </div>
@@ -89,10 +89,10 @@
                                 <div class="d-flex align-items-center">
                                     <button
                                         class="btn btn-link p-0 text-decoration-none like-button me-3"
-                                        id="likeButton"
+                                        id="like-Button"
                                     >
                                         <i class="far fa-heart me-1"></i>
-                                        <span id="likeCount">{{ post.like_num }}</span> Likes
+                                        <span id="like_num">{{ post.like_num }}</span> Likes
                                     </button>
                                     <button
                                         class="btn btn-link p-0 text-decoration-none me-3"
@@ -397,3 +397,5 @@
 
 
 {% endblock %}
+
+

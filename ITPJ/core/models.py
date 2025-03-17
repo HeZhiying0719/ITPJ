@@ -44,11 +44,7 @@ class Post(models.Model):
 
     content = models.TextField(max_length=500, null=False, blank=True)
 
-    category1 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category1')
-    category2 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category2', blank=True)
-    category3 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category3', blank=True)
-    category4 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category4', blank=True)
-    category5 = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category5', blank=True)
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category')
 
     like_num = models.IntegerField(default=0)
 

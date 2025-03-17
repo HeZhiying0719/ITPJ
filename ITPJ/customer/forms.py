@@ -11,11 +11,8 @@ class PostCreationForm(forms.ModelForm):
             'title',
             'photo',
             'content',
-            'category1',
-            'category2',
-            'category3',
-            'category4',
-            'category5'
+            'category'
+
         ]
 
 class CommentCreationForm(forms.ModelForm):
