@@ -53,7 +53,7 @@ class Post(models.Model):
     like_num = models.IntegerField(default=0)
 
     page_view = models.IntegerField(default=0)
-    post_status = models.ForeignKey(PostStatus, null=True, on_delete=models.SET_NULL, related_name='post_status')
+    post_status = models.ForeignKey(PostStatus, null=True, on_delete=models.SET_NULL, related_name='post_status', default=2)
 
 
 
@@ -100,5 +100,3 @@ class Comment(models.Model):
             comment_id = str(random.randint(1000000000, 9999999999))
             if not Comment.objects.filter(comment_id=comment_id).exists():
                 return comment_id
-
-

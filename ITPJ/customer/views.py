@@ -13,9 +13,11 @@ from django.views.generic import DetailView, ListView
 from users.forms import CustomerRegistrationForm
 from users.models import CustomUser
 from users.views import BaseUserLoginView
-from core.models import Post
+from core.models import Post, PostStatus
 from customer.forms import PostCreationForm, CommentCreationForm, ProfileForm
 from customer.models import UserProfile
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 class LoginView(BaseUserLoginView):
     # success_url = reverse_lazy('customer_dashboard', kwargs={"pk": self.request.user.pk})
@@ -91,7 +93,23 @@ class PostDetailView(LoginRequiredMixin, DetailView):
         return self.get(request, *args, **kwargs)
 
 
+
 class PostDeleteView(DeleteView):
     model = Post
     template_name = "customers/post_confirm_delete.html"
     success_url = reverse_lazy("home")
+
+class PostReportView(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['post_status']
+    template_name = "customers/report.html"
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if request:
+            post = self.object
+            post.post_status = PostStatus.objects.get(status='auditing')
+            post.save()
+            return redirect("home", pk=self.object.pk)
+
+        return self.get(request, *args, **kwargs)
