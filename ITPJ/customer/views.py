@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, TemplateView, UpdateView, DeleteView
 from tensorboard.plugins.audio.summary import audio
@@ -18,16 +18,21 @@ from customer.forms import PostCreationForm, CommentCreationForm, ProfileForm
 from customer.models import UserProfile
 
 class LoginView(BaseUserLoginView):
-    success_url = reverse_lazy('customer_dashboard')
+    # success_url = reverse_lazy('customer_dashboard', kwargs={"pk": self.request.user.pk})
     user_type = CustomUser.Type.CUSTOMER
 
+    def get_success_url(self):
+        if self.request.user.is_authenticated:
+            return reverse("customer_dashboard", kwargs={"pk": self.request.user.pk})
+        return reverse_lazy("home")
+
 class DashboardView(LoginRequiredMixin, DetailView):
-    model = UserProfile
+    model = CustomUser
     template_name = 'customers/dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_profile'] = self.object
+        context['user_profile'] = self.request.user.user_profile
         return context
 
 
