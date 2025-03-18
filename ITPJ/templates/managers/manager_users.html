@@ -124,16 +124,6 @@
                         class="d-flex justify-content-between align-items-center mb-4"
                     >
                         <h2 class="mb-0">User Management</h2>
-
-                        <div>
-                            <button
-                                class="btn btn-primary"
-                                data-bs-toggle="modal"
-                                data-bs-target="#addUserModal"
-                            >
-                                <i class="fas fa-user-plus me-1"></i> Add User
-                            </button>
-                        </div>
                     </div>
 
                     <!-- Users List -->
@@ -201,13 +191,20 @@
                                         <div
                                             class="col-md-2 d-flex justify-content-end"
                                             >
-                                            {% if user.type != 'manager' %}
+                                            {% if user.type == 'manager' %}
                                             <a
-
-                                                class="btn btn-outline-primary me-2 btn-sm action-btn"
-                                                data-bs-toggle="tooltip"
+                                                href="/manager/user-upgrade/{{user.id}}/"
+                                                class="btn btn-outline-secondary me-2 btn-sm"
+                                                title="Remove Admin"
+                                                data-action="make-admin"
+                                            >
+                                                <i class="fas fa-user-shield"></i>
+                                            </a>
+                                            {% else %}
+                                            <a
+                                                href="/manager/user-upgrade/{{user.id}}/"
+                                                class="btn btn-outline-primary me-2 btn-sm"
                                                 title="Make Admin"
-                                                data-user-id="2"
                                                 data-action="make-admin"
                                             >
                                                 <i class="fas fa-user-shield"></i>
@@ -223,11 +220,12 @@
                                                 <i class="fas fa-user-edit"></i>
                                             </button> {% endcomment %}
                                             <button
-                                                class="btn btn-outline-danger btn-sm action-btn"
-                                                data-bs-toggle="tooltip"
-                                                title="Delete User"
-                                                data-user-id="2"
+                                                class="btn btn-outline-danger btn-sm delete-user-button"
                                                 data-action="delete"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteUserModal"
+                                                data-user-id="{{user.id}}"
+                                                title="delete user"
                                             >
                                                 <i class="fas fa-user-times"></i>
                                             </button>
@@ -286,277 +284,6 @@
             </div>
         </div>
 
-        <!-- Edit User Modal -->
-        <div
-            class="modal fade"
-            id="editUserModal"
-            tabindex="-1"
-            aria-labelledby="editUserModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editUserModalLabel">
-                            Edit User
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editUserForm">
-                            <input type="hidden" id="editUserId" value="" />
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="editFullName" class="form-label"
-                                        >Full Name</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="editFullName"
-                                        placeholder="Enter full name"
-                                    />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="editEmail" class="form-label"
-                                        >Email</label
-                                    >
-                                    <input
-                                        type="email"
-                                        class="form-control"
-                                        id="editEmail"
-                                        placeholder="Enter email"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="editUserRole" class="form-label"
-                                        >User Role</label
-                                    >
-                                    <select
-                                        class="form-select"
-                                        id="editUserRole"
-                                    >
-                                        <option value="admin">
-                                            Administrator
-                                        </option>
-                                        <option value="user">
-                                            Regular User
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="editBio" class="form-label"
-                                    >Biography</label
-                                >
-                                <textarea
-                                    class="form-control"
-                                    id="editBio"
-                                    rows="3"
-                                    placeholder="Enter user bio"
-                                ></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="resetPassword"
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        for="resetPassword"
-                                    >
-                                        Reset Password
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 password-fields d-none">
-                                <label for="newPassword" class="form-label"
-                                    >New Password</label
-                                >
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="newPassword"
-                                    placeholder="Enter new password"
-                                />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            id="saveUserChanges"
-                        >
-                            Save Changes
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add User Modal -->
-        <div
-            class="modal fade"
-            id="addUserModal"
-            tabindex="-1"
-            aria-labelledby="addUserModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addUserModalLabel">
-                            Add New User
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="addUserForm">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="fullName" class="form-label"
-                                        >Full Name</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="fullName"
-                                        placeholder="Enter full name"
-                                        required
-                                    />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label"
-                                        >Email</label
-                                    >
-                                    <input
-                                        type="email"
-                                        class="form-control"
-                                        id="email"
-                                        placeholder="Enter email"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="userRole" class="form-label"
-                                    >User Role</label
-                                >
-                                <select class="form-select" id="userRole">
-                                    <option value="admin">Administrator</option>
-                                    <option value="user" selected>
-                                        Regular User
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="bio" class="form-label"
-                                    >Biography</label
-                                >
-                                <textarea
-                                    class="form-control"
-                                    id="bio"
-                                    rows="3"
-                                    placeholder="Enter user bio"
-                                ></textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="password" class="form-label"
-                                        >Password</label
-                                    >
-                                    <input
-                                        type="password"
-                                        class="form-control"
-                                        id="password"
-                                        placeholder="Enter password"
-                                        required
-                                    />
-                                </div>
-                                <div class="col-md-6">
-                                    <label
-                                        for="confirmPassword"
-                                        class="form-label"
-                                        >Confirm Password</label
-                                    >
-                                    <input
-                                        type="password"
-                                        class="form-control"
-                                        id="confirmPassword"
-                                        placeholder="Confirm password"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="sendWelcomeEmail"
-                                        checked
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        for="sendWelcomeEmail"
-                                    >
-                                        Send welcome email
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            id="createUser"
-                        >
-                            Create User
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Delete User Confirmation Modal -->
         <div
             class="modal fade"
@@ -597,13 +324,13 @@
                         >
                             Cancel
                         </button>
-                        <button
-                            type="button"
-                            class="btn btn-danger"
+                        <a 
+                            href='#'
+                            class="btn btn-danger delete-user-button"
                             id="confirmDeleteUser"
                         >
                             Delete User
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -646,5 +373,26 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <!-- Custom JS -->
         <script src="/static/js/admin-users.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // 监听所有删除按钮的点击事件
+                document.querySelectorAll(".delete-user-button").forEach(button => {
+                    button.addEventListener("click", function () {
+                        const userId = this.getAttribute("data-user-id"); // 获取帖子ID
+                        console.log = ("Clicked Post ID:", userId)
+                        if (!userId) {
+                            console.error("获取 userId 失败");
+                            return;
+                        }
+                        const deleteBtn = document.getElementById("confirmDeleteUser");
+            
+                        // 设置模态框的 "删除" 按钮链接
+                        deleteBtn.href = ""
+                        deleteBtn.href = `/manager/user-delete/${userId}/`;
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

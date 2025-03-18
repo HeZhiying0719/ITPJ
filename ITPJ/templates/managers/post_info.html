@@ -1,23 +1,239 @@
 <!DOCTYPE html>
-
-{%load static%}
-
-
-<html>
+<html lang="en">
     <head>
-        <title>post_info</title>
-    <head>
-    
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Posts Management - Focus Photography Forum</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- Font Awesome for icons -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <!-- Common CSS -->
+        <link href="/static/css/common.css" rel="stylesheet" />
+        <!-- Page Specific CSS -->
+        <link href="/static/css/admin-posts.css" rel="stylesheet" />
+
+    </head>
     <body>
-        <h1>Kiu says...</h1>
-        <div>
-            
-            {%if post%}
-                <strong>Here is the {{post.title}} page! <br/></strong>
-            {%else%}
-                <strong>Failed to get certain post</strong>
-            {%endif%}
+        <!-- Header/Navbar -->
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm"
+        >
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'home' %}" 
+                    ><img src="/static/img/Logo1.png" alt="Focus Logo"
+                /></a>
+
+                <!-- Admin Icons -->
+                <div class="d-flex align-items-center">
+                    <div class="nav-item dropdown">
+                        <a
+                            href="#"
+                            class="nav-link dropdown-toggle"
+                            id="profileDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <img
+                                src="\static\img\default-user.png"
+                                alt="Profile"
+                                class="avatar"
+                            />
+                        </a>
+                        <ul
+                            class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="profileDropdown"
+                        >
+                            <li>
+                                <a class="dropdown-item" href="/manager/posts/"
+                                >Posts Management</a
+                            >
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/manager/users/"
+                                    >Users Management</a
+                                >
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <form id="logout-form" action="{%url 'customer_logout'%}" method="post" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container py-4">
+            <div class="row">
+                <!-- Left Sidebar - Admin Menu -->
+                <div class="col-md-3 category-nav">
+                    <div class="list-group mb-4">
+                        <a
+                            href="/manager/posts/"
+                            class="list-group-item list-group-item-action active"
+                            >Posts Management</a
+                        >
+                        <a
+                            href="/manager/users/"
+                            class="list-group-item list-group-item-action"
+                            >Users Management</a
+                        >
+                    </div>
+                    <div class="mt-5">
+                        <a
+                            href="/manager/"
+                            class="btn btn-outline-secondary w-100"
+                            >About us</a
+                        >
+                    </div>
+                </div>
+
+                <!-- Right Content Area - Posts Management -->
+                    
+    <div class="col-md-9">
+                    
+
+        <!-- Post Details Card -->
+        <div class="card post-card mb-4">
+            <div class="card-body">
+                <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                >
+                    <div class="d-flex align-items-center">
+                        {% if post.user.user_profile.avatar.url %}
+                        <img src="{{ post.user.user_profile.avatar.url }}" alt="User Avatar" class="avatar">
+                        {% else %}
+                        <img src="/static/img/default-user.png" alt="User Avatar" class="avatar">
+                        {% endif %}
+                        <div>
+                            <h6 class="mb-0">   {{ post.user.username }}</h6>
+                            <small class="text-muted"
+                                >   Posted on {{ post.updated_at }} •
+                                {{ post.category1 }}</small
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="post-title mb-3">
+                    {{ post.title }}
+                </h1>
+
+                <div class="post-content">
+                    {% if post.photo %}
+                    <img src="{{ post.photo.url }}" alt="Post Image">
+                    {% endif %}
+                    
+                </div>
+                <div class="comment-content mt-2">
+                    <p>
+                        {{ post.content }}
+                    </p>
+                    
+                </div>
+
+                <div
+                    class="post-actions d-flex justify-content-between align-items-center mt-4 pt-3 border-top"
+                >
+                    <div class="d-flex align-items-center">
+                        <button
+                            class="btn btn-link p-0 text-decoration-none like-button me-3"
+                            id="likeButton"
+                        >
+                            <i class="far fa-heart me-1"></i>
+                            <span id="likeCount">{{ post.like_num }}</span> Likes
+                        </button>
+                        <button
+                            class="btn btn-link p-0 text-decoration-none me-3"
+                        >
+                            <i class="far fa-comment me-1"></i>
+                            <span>{{ comment_count }}</span> Comments
+                        </button>
+                        <button
+                            class="btn btn-link p-0 text-decoration-none"
+                        >
+                            <i class="far fa-eye me-1"></i>
+                            <span>{{ post.page_view }}</span> Views
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+    </div>
+</div>
+</div>
+
+        <!-- Footer -->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="/static/img/Logo2.png" alt="Logo" class="logo" />
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Connect With Us</h5>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="text-white mx-2"
+                                ><i class="fab fa-youtube"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <p class="small mb-0">
+                        © 2025 Focus Photography Forum. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS with Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom JS -->
+        <script src="/static/js/admin-posts.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // 监听所有删除按钮的点击事件
+                document.querySelectorAll(".delete-post-btn").forEach(button => {
+                    button.addEventListener("click", function () {
+                        const postId = this.getAttribute("data-post-id"); // 获取帖子ID
+                        console.log = ("Clicked Post ID:", postId)
+                        if (!postId) {
+                            console.error("获取 post_id 失败");
+                            return;
+                        }
+                        const deleteBtn = document.getElementById("confirmDeleteBtn");
+            
+                        // 设置模态框的 "删除" 按钮链接
+                        deleteBtn.href = ""
+                        deleteBtn.href = `/manager/post-delete/${postId}/`;
+                    });
+                });
+            });
+        </script>
     </body>
+        
 </html>
