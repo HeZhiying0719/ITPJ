@@ -86,14 +86,18 @@
                             <div
                                 class="post-actions d-flex justify-content-between align-items-center mt-4 pt-3 border-top"
                             >
-                                <div class="d-flex align-items-center">
-                                    <button
+                                <div class="d-flex align-items-center" id="post-{{ post.pk }}">
+                                    {% csrf_token %}
+                                    <a
                                         class="btn btn-link p-0 text-decoration-none like-button me-3"
                                         id="like-Button"
+                                        href="{% url 'like_post' post.pk %}"
                                     >
                                         <i class="far fa-heart me-1"></i>
                                         <span id="like_num">{{ post.like_num }}</span> Likes
-                                    </button>
+                                    </a>
+                                    
+                                    
                                     <button
                                         class="btn btn-link p-0 text-decoration-none me-3"
                                     >
@@ -393,9 +397,5 @@
             </div>
         </div>
     </div>
-
-
-
+   
 {% endblock %}
-
-
