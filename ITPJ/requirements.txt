@@ -8,3 +8,4 @@ shapely==2.0.7
 sqlparse==0.4.4
 sympy==1.13.3
 typing_extensions==4.6.1
+dj-database-url==2.0.0
