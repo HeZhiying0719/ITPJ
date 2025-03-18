@@ -1,12 +1,7 @@
-import logging
-import math
-from datetime import datetime
-
 from django.http import JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import TemplateView, DetailView
 from django.views import View
-from sympy.integrals.meijerint_doc import category
 from django.db.models import Q, F
 from core.models import Post, Category
 
