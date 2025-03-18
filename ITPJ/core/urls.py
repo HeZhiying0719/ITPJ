@@ -1,5 +1,4 @@
 from django.urls import path
-from win32ui import CreateView
 
 from core.views import *
 

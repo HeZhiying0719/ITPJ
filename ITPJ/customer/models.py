@@ -4,9 +4,6 @@ from django.conf import settings
 from core.models import Post
 from users.models import CustomUser
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
 
 #User Profile (Including Avatar)
 class UserProfile(models.Model):

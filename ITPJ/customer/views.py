@@ -6,13 +6,9 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.utils.translation import gettext_lazy as _
-from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, TemplateView, UpdateView, DeleteView, View
-from tensorboard.plugins.audio.summary import audio
 from customer.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView
-from users.forms import CustomerRegistrationForm
 from users.models import CustomUser
 from users.views import BaseUserLoginView
 from core.models import Post, PostStatus, Like
