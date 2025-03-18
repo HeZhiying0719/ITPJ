@@ -82,7 +82,7 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 
 DATABASES = {
     'default': dj_database_url.config(
-    default=os.getenv('DATABASE_URL')
+    default=os.getenv('jdbc:mysql://localhost:3306/ITPJ')
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'HOST': 'localhost',
