@@ -10,15 +10,6 @@ from sympy.integrals.meijerint_doc import category
 from django.db.models import Q, F
 from core.models import Post, Category
 
-def hot_score(likes, views, created_at):
-
-    post_age_seconds = created_at - 0
-
-    log_likes = math.log2(max(likes, 1))
-    views_factor = views / 1000
-    time_decay = post_age_seconds / 45000
-    return int(log_likes + views_factor - time_decay)
-
 class HomePageView(TemplateView):
     template_name = 'core/homepage.html'
 
@@ -40,7 +31,7 @@ class HomePageEquipmentView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=1)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=1)&Q(post_status=2)).order_by('-created_at')
         return context
 
 class HomeLandscapeView(TemplateView):
@@ -48,7 +39,7 @@ class HomeLandscapeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=2)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=2)&Q(post_status=2)).order_by('-created_at')
         return context
 
 class HomeNatureView(TemplateView):
@@ -56,7 +47,7 @@ class HomeNatureView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=3)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=3)&Q(post_status=2)).order_by('-created_at')
         return context
 
 
@@ -65,7 +56,7 @@ class HomeStreetView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=4)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=4)&Q(post_status=2)).order_by('-created_at')
         return context
 
 
@@ -74,7 +65,7 @@ class HomeTravelView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=5)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=5)&Q(post_status=2)).order_by('-created_at')
         return context
 
 
@@ -83,7 +74,7 @@ class HomeLifestyleView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=6)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=6)&Q(post_status=2)).order_by('-created_at')
         return context
 
 
@@ -92,7 +83,7 @@ class HomeCreativeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=7)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=7)&Q(post_status=2)).order_by('-created_at')
         return context
 
 
@@ -101,7 +92,7 @@ class HomeObjectView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=8)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=8)&Q(post_status=2)).order_by('-created_at')
         return context
 
 
@@ -110,7 +101,7 @@ class HomePortraitureView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(Q(category=9)|Q(post_status=2)).order_by('-created_at')
+        context['posts'] = Post.objects.filter(Q(category=9)&Q(post_status=2)).order_by('-created_at')
         return context
 
 

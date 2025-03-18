@@ -2,6 +2,10 @@ from django.db import models
 from django.conf import settings
 import random
 from django.utils.translation import gettext_lazy as _
+
+from users.models import CustomUser
+
+
 # from shapely.predicates import relate
 
 
@@ -96,3 +100,13 @@ class Comment(models.Model):
             comment_id = str(random.randint(1000000000, 9999999999))
             if not Comment.objects.filter(comment_id=comment_id).exists():
                 return comment_id
+
+
+
+class Like(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')

@@ -6,24 +6,32 @@
     <div class="col-md-9">
     <!-- Featured Posts (3 boxes at top) -->
     <div class="row mb-4">
+    
         {% for post in posts %}
         <div class="col-md-4">
             <a href="{% url 'post_detail' post.post_id %}" class="text-decoration-none">
-                <div class="card h-100" style="min-height: 300px;">
+                <div class="card h-200" style="min-height: 300px;">
                     {% if post.photo %}
                     <img src="{{ post.photo.url }}" alt="Post Image">
+                        {% else %}
+                        <img src="/static/img/Logo1.png" alt="Post Image">
                     {% endif %}
                     <div class="card-body">
                         <h6 class="card-title">
                             {{ post.title }}
                         </h6>
-                        <div class="d-flex justify-content-between align-items-center mt-2 text-muted" style="font-size: 0.9rem; gap: 10px;">
-                            <small class="fw-semibold"><i class="bi bi-person-circle"></i> {{ post.user.username }}</small>
-                            <small class="fw-light"><i class="bi bi-clock"></i> {{ post.created_at|date:"Y-m-d H:i" }}</small>
-                            <small class="fw-light"><i class="bi bi-arrow-clockwise"></i> {{ post.updated_at|date:"Y-m-d H:i" }}</small>
-{#                            <small class="fw-light"><i class="bi bi-arrow-clockwise"></i> {{ post.like_num }} likes</small>#}
-                            <small class="fw-light"><i class="bi bi-arrow-clockwise"></i> {{ post.page_view }} views</small>
-                        </div>
+                        <div class="d-flex justify-content-between align-items-center text-muted" 
+         style="font-size: 0.85rem; line-height: 1.2; margin-bottom: 3px;">
+        <small class="fw-semibold"><i class="bi bi-person-circle"></i>posted by: {{ post.user.username }}</small>
+        <small class="fw-light"><i class="bi bi-clock"></i>created at: {{ post.created_at|date:"Y-m-d H:i" }}</small>
+    </div>
+
+    <!-- 第二排 -->
+    <div class="d-flex justify-content-between align-items-center text-muted" 
+         style="font-size: 0.85rem; line-height: 1.2;">
+        <small class="fw-light"><i class="bi bi-eye"></i> {{ post.page_view }} views</small>
+        <small class="fw-light"><i class="bi bi-heart"></i> {{ post.like_num }} likes</small>
+    </div>
 
                     </div>
                 </div>
