@@ -27,5 +27,7 @@ urlpatterns = [
     path('post-info/<str:auditing_post_id>/', views.post_details, name='post_details'),
     path('post-delete/<str:auditing_post_id>/', views.delete_post, name='post_delete'),
     path('post-approve/<str:auditing_post_id>/', views.approve_post, name='post_approve'),
+    path('user-upgrade/<int:upgrade_user_id>/', views.upgrade_user, name='user_upgrade'),
+    path('user-delete/<int:delete_user_id>/', views.delete_user, name='user_delete'),
     
 ]

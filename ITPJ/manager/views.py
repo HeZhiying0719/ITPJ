@@ -44,7 +44,7 @@ def manage_post(request):
         #获取所有审核状态下的帖子
         post_list = Post.objects.filter(post_status__status = PostStatus.Status.AUDITING)
         #目前方便测试翻页功能设定为一页有2个帖子,之后更换为4个为最好
-        paginator = Paginator(post_list, 3)
+        paginator = Paginator(post_list, 1)
         page = request.GET.get('page')
         #16/3
         # 
@@ -114,7 +114,7 @@ def manage_user(request):
     try:
         user_list = CustomUser.objects.all()
         #4 or 5 
-        paginator = Paginator(user_list, 3)
+        paginator = Paginator(user_list, 2)
         page = request.GET.get('page')
         try:
             users = paginator.page(page)
@@ -163,3 +163,30 @@ def approve_post(request, auditing_post_id):
     post.save()
     
     return redirect('manager:manage_posts')
+
+
+def upgrade_user(request, upgrade_user_id):
+    
+    print(f"Tring to upgrade user with id: {upgrade_user_id}")
+    user = get_object_or_404(CustomUser, id = upgrade_user_id)
+    if(user.type == 'manager'):
+        user.type = 'customer'
+    else:
+        user.type = 'manager'
+    user.save()
+    
+    return redirect('manager:manage_users')
+
+
+def delete_user(request, delete_user_id):
+    
+    print(f"Tring to delete user with id: {delete_user_id}")
+    user = get_object_or_404(CustomUser, id = delete_user_id)
+    post_list = Post.objects.all()
+    for post in post_list:
+        if post.user.id == delete_user_id:
+            post.delete()
+    
+    user.delete()
+    
+    return redirect('manager:manage_users')
