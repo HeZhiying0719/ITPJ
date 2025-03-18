@@ -11,7 +11,7 @@ class UserProfile(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_profile'
     )
 
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, default="/static/img/default-user.png")
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
     introduction = models.TextField(null=True, blank=True, default="no introduction yet")
 
