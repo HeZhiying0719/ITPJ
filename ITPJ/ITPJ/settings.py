@@ -82,16 +82,16 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'NAME': 'ITPJ',
-        'USER': 'root',
-        'PASSWORD': '123456',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'HOST': 'localhost',
+        # 'PORT': '3306',
+        # 'NAME': 'ITPJ',
+        # 'USER': 'root',
+        # 'PASSWORD': '123456',
     }
 }
 
-
+DATABASES["default"] = dj_database_url.parse("postgresql://focus_hr6e_user:e9PUNOQ1tWp5BY2f2zT0vtNY65K4OSvS@dpg-cvd0pihu0jms739itf3g-a/focus_hr6e")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
