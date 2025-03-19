@@ -113,7 +113,7 @@
                     class="d-flex justify-content-between align-items-start mb-3"
                 >
                     <div class="d-flex align-items-center">
-                        {% if post.user.user_profile.avatar.url %}
+                        {% if post.user.user_profile.avatar %}
                         <img src="{{ post.user.user_profile.avatar.url }}" alt="User Avatar" class="avatar">
                         {% else %}
                         <img src="/static/img/default-user.png" alt="User Avatar" class="avatar">
