@@ -36,11 +36,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "core",
-    "visitor",
-    "manager",
-    "customer",
-    "users",
+    "ITPJ.ITPJ.core",
+    "ITPJ.ITPJ.visitor",
+    "ITPJ.ITPJ.manager",
+    "ITPJ.ITPJ.customer",
+    "ITPJ.ITPJ.users",
 ]
 
 MIDDLEWARE = [
@@ -90,7 +90,7 @@ DATABASES = {
     }
 }
 DATABASES["default"] = dj_database_url.parse("postgresql://focus_xvtp_user:KqXCv9LyGdA8nR4lNFNqNV3HUPyYE9rt@dpg-cvd0gilrie7s739k9acg-a/focus_xvtp")
-
+ 
 
 
 # Password validation
