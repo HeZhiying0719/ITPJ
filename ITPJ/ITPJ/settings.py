@@ -142,9 +142,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # 确保 static 目录路径正确
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),  # 确保 static 目录路径正确
+# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
