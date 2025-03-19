@@ -31,21 +31,6 @@
                     ><img src="/static/img/Logo1.png" alt="Focus Logo"
                 /></a>
 
-                <!-- Search Box -->
-                <form class="search-form d-flex ms-auto me-3">
-                    <div class="input-group">
-                        <input
-                            class="form-control"
-                            type="search"
-                            placeholder="Search posts..."
-                            aria-label="Search"
-                        />
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-
                 <!-- Create Button and Icons -->
                 <div class="d-flex align-items-center">
                     <a href="{% url 'customer_posting_view' %}">
@@ -189,10 +174,10 @@
                             {% endif %} 
                             
                         {% else %}
-                            <div id="go-to-login">
-                            <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">LOG IN</a>
-
-                        </div>
+{#                            <div id="go-to-login">#}
+{#                            <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">LOG IN</a>#}
+{##}
+{#                        </div>#}
                         {% endif %}
                         
                     </ul>
