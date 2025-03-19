@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -90,6 +89,7 @@ DATABASES = {
         'PASSWORD': '123456',
     }
 }
+DATABASES["default"] = dj_database_url.parse("postgresql://focus_xvtp_user:KqXCv9LyGdA8nR4lNFNqNV3HUPyYE9rt@dpg-cvd0gilrie7s739k9acg-a/focus_xvtp")
 
 
 
