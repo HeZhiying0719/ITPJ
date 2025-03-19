@@ -92,11 +92,11 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 # }
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('postgresql://focus_689u_user:BzY77murx0JU8P4ioqJz739OMEbUZdHc@dpg-cvdes756l47c7393i66g-a/focus_689u')
+        default=os.getenv('postgresql://focus_f9ux_user:HSCJWImf4RBkxU0Rlbpy4u5tyukbJ6dn@dpg-cvdf12jqf0us73f9qiv0-a/focus_f9ux')
     )
 }
 
-DATABASES["default"] = dj_database_url.parse("postgresql://focus_689u_user:BzY77murx0JU8P4ioqJz739OMEbUZdHc@dpg-cvdes756l47c7393i66g-a/focus_689u")
+DATABASES["default"] = dj_database_url.parse("postgresql://focus_f9ux_user:HSCJWImf4RBkxU0Rlbpy4u5tyukbJ6dn@dpg-cvdf12jqf0us73f9qiv0-a/focus_f9ux")
 
 ALLOWED_HOSTS = [
     '.onrender.com',
