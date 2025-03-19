@@ -74,17 +74,19 @@
                                         aria-expanded="false"
                                     >
 {#                                        FINDING THE PATH TO THE CUSTOMER AVATAR#}
-                                        {% if not user.user_profile.avatar %}
-                                        <img
-                                            src="/static/img/default-user.png"
-                                            alt="Profile"
-                                            class="avatar"
-                                        />
-                                        {% else %}
+                                        {% if user.user_profile.avatar %}
                                             <img
                                             src="{{ user.user_profile.avatar.url }}"
                                             alt="Profile"
                                             class="avatar"
+                                        
+                                        />
+                                        {% else %}
+                                            <img
+                                            src="/static/img/default-user.png"
+                                            alt="Profile"
+                                            class="avatar"
+                                            
                                         />
                                         {% endif %}
                                         
