@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Blog',
             fields=[
-                ('blog_id', models.IntegerField(primary_key=True, serialize=False, unique=True)),
+                ('post_id', models.IntegerField(primary_key=True, serialize=False, unique=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('type', models.CharField(max_length=20)),
