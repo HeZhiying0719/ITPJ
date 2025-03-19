@@ -36,11 +36,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "ITPJ.ITPJ.core",
-    "ITPJ.ITPJ.visitor",
-    "ITPJ.ITPJ.manager",
-    "ITPJ.ITPJ.customer",
-    "ITPJ.ITPJ.users",
+    "core",
+    "visitor",
+    "manager",
+    "customer",
+    "users",
 ]
 
 MIDDLEWARE = [
