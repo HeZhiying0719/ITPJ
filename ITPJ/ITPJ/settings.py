@@ -93,6 +93,13 @@ DATABASES = {
 
 DATABASES["default"] = dj_database_url.parse("postgresql://focus_hr6e_user:e9PUNOQ1tWp5BY2f2zT0vtNY65K4OSvS@dpg-cvd0pihu0jms739itf3g-a/focus_hr6e")
 
+ALLOWED_HOSTS = [
+    '.onrender.com',   # Render 服务
+    'focus-qni6.onrender.com',  # 你的 Render 域名
+    'localhost',        # 本地测试
+    '127.0.0.1'         # 本地测试
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
