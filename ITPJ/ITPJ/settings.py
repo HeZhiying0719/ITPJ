@@ -36,11 +36,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "core",
-    "visitor",
-    "manager",
-    "customer",
-    "users",
+    "ITPJ.core",
+    "ITPJ.visitor",
+    "ITPJ.manager",
+    "ITPJ.customer",
+    "ITPJ.users",
 ]
 
 MIDDLEWARE = [
@@ -81,15 +81,11 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'NAME': 'ITPJ',
-        'USER': 'root',
-        'PASSWORD': '123456',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME' : BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES["default"] = dj_database_url.parse("postgresql://focus_xvtp_user:KqXCv9LyGdA8nR4lNFNqNV3HUPyYE9rt@dpg-cvd0gilrie7s739k9acg-a/focus_xvtp")
+# DATABASES["default"] = dj_database_url.parse("postgresql://focus_xvtp_user:KqXCv9LyGdA8nR4lNFNqNV3HUPyYE9rt@dpg-cvd0gilrie7s739k9acg-a/focus_xvtp")
  
 
 
