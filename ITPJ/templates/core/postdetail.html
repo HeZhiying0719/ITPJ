@@ -17,7 +17,15 @@
                                 class="d-flex justify-content-between align-items-start mb-3"
                             >
                                 <div class="d-flex align-items-center">
+                                    {% if not post.user.user_profile.avatar %}
+                                        <img
+                                            src="/static/img/default-user.png"
+                                            alt="Profile"
+                                            class="avatar"
+                                        />
+                                    {% else %}
                                     <img src="{{ post.user.user_profile.avatar.url }}" alt="Post Image" class="avatar">
+                                    {% endif %}
                                     <div>
                                         <h6 class="mb-0">   {{ post.user.username }}</h6>
                                         <small class="text-muted"
@@ -127,11 +135,15 @@
                             {% csrf_token %}
                             <div class="comment-form mb-4">
                                 <div class="d-flex mb-3">
-                                    <img
-                                        src="{{ user.user_profile.avatar.url }}"
-                                        alt="Your Avatar"
-                                        class="avatar"
-                                    />
+                                    {% if not post.user.user_profile.avatar %}
+                                        <img
+                                            src="/static/img/default-user.png"
+                                            alt="Profile"
+                                            class="avatar"
+                                        />
+                                    {% else %}
+                                    <img src="{{ post.user.user_profile.avatar.url }}" alt="Post Image" class="avatar">
+                                    {% endif %}
                                     <div class="flex-grow-1">
                                         <textarea
                                             class="form-control"
@@ -182,11 +194,20 @@
                             {% for comment in comments %}
                                 <div class="comment mb-4">
                                     <div class="d-flex">
+                                        {% if not comment.user.user_profile.avatar %}
                                         <img
+                                            src="/static/img/default-user.png"
+                                            alt="Profile"
+                                            class="avatar"
+                                        />
+                                    {% else %}
+                                    <img
                                             src="{{ comment.user.user_profile.avatar.url }}"
                                             alt="Commenter Avatar"
                                             class="avatar"
                                         />
+                                    {% endif %}
+                                        
                                         <div class="flex-grow-1">
                                             <div
                                                 class="d-flex justify-content-between align-items-start"
