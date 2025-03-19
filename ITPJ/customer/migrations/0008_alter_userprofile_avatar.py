@@ -5,9 +5,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('customer', '0007_delete_favicon'),
-    ]
 
     operations = [
         migrations.AlterField(

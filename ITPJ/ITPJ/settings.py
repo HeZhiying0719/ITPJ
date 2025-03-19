@@ -79,24 +79,24 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 
 # Database
 
-
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'HOST': 'localhost',
 #         'PORT': '3306',
-#         'NAME': 'ITPJ',
+#         'NAME': 'itpjtest',
 #         'USER': 'root',
 #         'PASSWORD': '123456',
 #     }
 # }
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('postgresql://focus_uir5_user:HgREGXd9tIRrfhjBLTkRxqJYyxrrqGXD@dpg-cvde50rv2p9s73cecjf0-a/focus_uir5')
+        default=os.getenv('postgresql://focus_689u_user:BzY77murx0JU8P4ioqJz739OMEbUZdHc@dpg-cvdes756l47c7393i66g-a/focus_689u')
     )
 }
 
-DATABASES["default"] = dj_database_url.parse("postgresql://focus_uir5_user:HgREGXd9tIRrfhjBLTkRxqJYyxrrqGXD@dpg-cvde50rv2p9s73cecjf0-a/focus_uir5")
+DATABASES["default"] = dj_database_url.parse("postgresql://focus_689u_user:BzY77murx0JU8P4ioqJz739OMEbUZdHc@dpg-cvdes756l47c7393i66g-a/focus_689u")
 
 ALLOWED_HOSTS = [
     '.onrender.com',
