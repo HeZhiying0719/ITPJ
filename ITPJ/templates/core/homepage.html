@@ -10,7 +10,7 @@
         {% for post in posts %}
         <div class="col-md-4">
             <a href="{% url 'post_detail' post.post_id %}" class="text-decoration-none">
-                <div class="card h-200" style="min-height: 300px;">
+                <div class="card h-100" style="min-height: 300px; max-height: 400px;">
                     {% if post.photo %}
                     <img src="{{ post.photo.url }}" alt="Post Image">
                         {% else %}
@@ -21,17 +21,17 @@
                             {{ post.title }}
                         </h6>
                         <div class="d-flex justify-content-between align-items-center text-muted" 
-         style="font-size: 0.85rem; line-height: 1.2; margin-bottom: 3px;">
-        <small class="fw-semibold"><i class="bi bi-person-circle"></i>posted by: {{ post.user.username }}</small>
-        <small class="fw-light"><i class="bi bi-clock"></i>created at: {{ post.created_at|date:"Y-m-d H:i" }}</small>
-    </div>
-
-    <!-- 第二排 -->
-    <div class="d-flex justify-content-between align-items-center text-muted" 
-         style="font-size: 0.85rem; line-height: 1.2;">
-        <small class="fw-light"><i class="bi bi-eye"></i> {{ post.page_view }} views</small>
-        <small class="fw-light"><i class="bi bi-heart"></i> {{ post.like_num }} likes</small>
-    </div>
+                             style="font-size: 0.85rem; line-height: 1.2; margin-bottom: 3px;">
+                            <small class="fw-semibold"><i class="bi bi-person-circle"></i>posted by: {{ post.user.username }}</small>
+                            <small class="fw-light"><i class="bi bi-clock"></i>created at: {{ post.created_at|date:"Y-m-d H:i" }}</small>
+                        </div>
+                    
+                        <!-- 第二排 -->
+                        <div class="d-flex justify-content-between align-items-center text-muted" 
+                             style="font-size: 0.85rem; line-height: 1.2;">
+                            <small class="fw-light"><i class="bi bi-eye"></i> {{ post.page_view }} views</small>
+                            <small class="fw-light"><i class="bi bi-heart"></i> {{ post.like_num }} likes</small>
+                        </div>
 
                     </div>
                 </div>

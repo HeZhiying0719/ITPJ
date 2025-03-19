@@ -15,7 +15,7 @@
         {% for post in posts %}
         <div class="col-md-4">
             <a href="{% url 'post_detail' post.post_id %}" class="text-decoration-none">
-                <div class="card h-200" style="min-height: 300px;">
+                <div class="card h-100" style="min-height: 300px; max-height: 400px;">
                     {% if post.photo %}
                     <img src="{{ post.photo.url }}" alt="Post Image">
                         {% else %}
