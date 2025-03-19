@@ -89,7 +89,7 @@
                                         aria-expanded="false"
                                     >
 {#                                        FINDING THE PATH TO THE CUSTOMER AVATAR#}
-                                        {% if user.user_profile.avatar.url == null %}
+                                        {% if not user.user_profile.avatar %}
                                         <img
                                             src="/static/img/default-user.png"
                                             alt="Profile"
