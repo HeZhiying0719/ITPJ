@@ -80,18 +80,30 @@ WSGI_APPLICATION = "ITPJ.wsgi.application"
 # Database
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'NAME': 'ITPJ',
+#         'USER': 'root',
+#         'PASSWORD': '123456',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'NAME': 'ITPJ',
-        'USER': 'root',
-        'PASSWORD': '123456',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('postgresql://focus_uir5_user:HgREGXd9tIRrfhjBLTkRxqJYyxrrqGXD@dpg-cvde50rv2p9s73cecjf0-a/focus_uir5')
+    )
 }
 
+DATABASES["default"] = dj_database_url.parse("postgresql://focus_uir5_user:HgREGXd9tIRrfhjBLTkRxqJYyxrrqGXD@dpg-cvde50rv2p9s73cecjf0-a/focus_uir5")
 
+ALLOWED_HOSTS = [
+    '.onrender.com',
+    'focus-qni6.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -129,9 +141,27 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # 确保 static 目录路径正确
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),  # 确保 static 目录路径正确
+# ]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+if 'RENDER' in os.environ:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
