@@ -51,12 +51,7 @@
                     <a href="{% url 'customer_posting_view' %}">
                         <button class="btn btn-primary me-3">CREATE</button>
                     </a>
-                {% if not user.is_authenticated %}
-                            <div id="go-to-login">
-                            <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">LOG IN</a>
-
-                        </div>
-                {% endif %}
+                
 
 {#                    NOTIFICATION#}
 {#                    <div class="nav-item me-3 position-relative">#}
@@ -74,6 +69,12 @@
                     <!-- User Profile/Login Button (this will change based on login state) -->
                 
                     <ul class="navbar-nav">
+                    {% if not user.is_authenticated %}
+                            <div id="go-to-login">
+                            <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">LOG IN</a>
+
+                        </div>
+                    {% endif %}
                         
                         {% if user.is_authenticated %}
                             {% if user.type == 'customer' %}
@@ -185,6 +186,12 @@
                                 </div>
 
                             {% endif %} 
+                            
+                        {% else %}
+                            <div id="go-to-login">
+                            <a class="btn btn-primary me-3" href="{% url 'customer_login' %}">LOG IN</a>
+
+                        </div>
                         {% endif %}
                         
                     </ul>
