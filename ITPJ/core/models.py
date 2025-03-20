@@ -46,7 +46,7 @@ class Post(models.Model):
 
     photo = models.ImageField(upload_to='post_photos/', null=True, blank=True)
 
-    content = models.TextField(max_length=500, null=False, blank=True)
+    content = models.TextField(max_length=10000, null=False, blank=True)
 
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='category')
 
