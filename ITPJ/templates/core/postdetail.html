@@ -135,14 +135,14 @@
                             {% csrf_token %}
                             <div class="comment-form mb-4">
                                 <div class="d-flex mb-3">
-                                    {% if not post.user.user_profile.avatar %}
+                                    {% if not user.user_profile.avatar %}
                                         <img
                                             src="/static/img/default-user.png"
                                             alt="Profile"
                                             class="avatar"
                                         />
                                     {% else %}
-                                    <img src="{{ post.user.user_profile.avatar.url }}" alt="Post Image" class="avatar">
+                                    <img src="{{ user.user_profile.avatar.url }}" alt="Post Image" class="avatar">
                                     {% endif %}
                                     <div class="flex-grow-1">
                                         <textarea
