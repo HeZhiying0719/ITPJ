@@ -24,7 +24,7 @@ class LoginView(BaseUserLoginView):
 
     def get_success_url(self):
         if self.request.user.is_authenticated:
-            return reverse("customer_dashboard", kwargs={"pk": self.request.user.pk})
+            return reverse("home")
         return reverse_lazy("home")
 
 class DashboardView(LoginRequiredMixin, DetailView):
