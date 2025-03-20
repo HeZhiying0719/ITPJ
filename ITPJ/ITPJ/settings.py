@@ -164,7 +164,7 @@ if 'RENDER' in os.environ:
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/opt/render/project/src/ITPJ/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
